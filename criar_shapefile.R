@@ -4,6 +4,8 @@ library(leaflet)
 
 library(leaflet.extras)
 
+library(leafem)
+
 library(mapedit)
 
 library(sf)
@@ -22,4 +24,5 @@ mapa <- leaflet::leaflet() |>
                                  circleOptions = TRUE,
                                  rectangleOptions = TRUE,
                                  markerOptions = TRUE,
-                                 editOptions = leaflet.extras::editToolbarOptions())
+                                 editOptions = leaflet.extras::editToolbarOptions()) |>
+  leafem::addMouseCoordinates()
