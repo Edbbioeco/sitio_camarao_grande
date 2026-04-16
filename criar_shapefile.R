@@ -26,3 +26,9 @@ mapa <- leaflet::leaflet() |>
                                  markerOptions = TRUE,
                                  editOptions = leaflet.extras::editToolbarOptions()) |>
   leafem::addMouseCoordinates()
+
+## Criar o shapefile ----
+
+shapefile_sitio <- mapedit::editMap(mapa)
+
+shapefile_sitio <- shapefile_sitio$drawn
