@@ -1,5 +1,7 @@
 # pácotes ----
 
+library(geobr)
+
 library(leaflet)
 
 library(leaflet.extras)
