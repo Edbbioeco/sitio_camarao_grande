@@ -45,7 +45,8 @@ mapa <- leaflet::leaflet() |>
                                          "font-weight" = "bold",
                                          "padding" = "10px",
                                          "background-color" = "#ffffff",
-                                         "color" = "#000000" ))
+                                         "color" = "#000000" )) |>
+  leaflet::addPolygons(data = amaraji)
 
 ## Criar o shapefile ----
 
