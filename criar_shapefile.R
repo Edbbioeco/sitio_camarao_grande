@@ -25,7 +25,11 @@ mapa <- leaflet::leaflet() |>
                                  rectangleOptions = TRUE,
                                  markerOptions = TRUE,
                                  editOptions = leaflet.extras::editToolbarOptions()) |>
-  leafem::addMouseCoordinates()
+  leafem::addMouseCoordinates(css = list("font-size" = "12px",
+                                         "font-weight" = "bold",
+                                         "padding" = "10px",
+                                         "background-color" = "#ffffff",
+                                         "color" = "#000000" ))
 
 ## Criar o shapefile ----
 
