@@ -12,6 +12,13 @@ library(tidyverse)
 
 library(sf)
 
+# Shapefile do município de Amaraji ----
+
+## Importar ----
+
+amaraji <- geobr::read_municipality() |>
+  dplyr::filter(name_muni == "Amaraji")
+
 # Criar o shapefile ----
 
 ## Ativar a interface interativa ----
@@ -25,7 +32,7 @@ mapa <- leaflet::leaflet() |>
                                  rectangleOptions = TRUE,
                                  markerOptions = TRUE,
                                  editOptions = leaflet.extras::editToolbarOptions()) |>
-  leafem::addMouseCoordinates(css = list("font-size" = "12px",
+  leafem::addMouseCoordinates(css = list("font-size" = "8px",
                                          "font-weight" = "bold",
                                          "padding" = "10px",
                                          "background-color" = "#ffffff",
