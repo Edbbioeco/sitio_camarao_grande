@@ -32,3 +32,15 @@ mapa <- leaflet::leaflet() |>
 shapefile_sitio <- mapedit::editMap(mapa)
 
 shapefile_sitio <- shapefile_sitio$drawn
+
+## Visualizar ----
+
+shapefile_sitio
+
+ggplot() +
+  geom_sf(data = shapefile_sitio)
+
+## Exportar ----
+
+shapefile_sitio |>
+  sf::st_write("shapefile_sitio.shp")
