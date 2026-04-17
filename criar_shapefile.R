@@ -48,6 +48,8 @@ mapa <- leaflet::leaflet() |>
                                          "color" = "#000000" )) |>
   leaflet::addPolygons(data = amaraji)
 
+mapa
+
 ## Criar o shapefile ----
 
 shapefile_sitio <- mapedit::editMap(mapa)
