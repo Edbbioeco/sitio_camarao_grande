@@ -19,6 +19,13 @@ library(sf)
 amaraji <- geobr::read_municipality() |>
   dplyr::filter(name_muni == "Amaraji")
 
+## Visualizar ----
+
+amaraji
+
+ggplot() +
+  geom_sf(data = amaraji)
+
 # Criar o shapefile ----
 
 ## Ativar a interface interativa ----
