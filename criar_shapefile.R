@@ -8,9 +8,9 @@ library(leafem)
 
 library(mapedit)
 
-library(sf)
-
 library(tidyverse)
+
+library(sf)
 
 # Criar o shapefile ----
 
