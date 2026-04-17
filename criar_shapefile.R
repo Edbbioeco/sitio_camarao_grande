@@ -2,6 +2,8 @@
 
 library(geobr)
 
+library(tidyverse)
+
 library(leaflet)
 
 library(leaflet.extras)
@@ -9,8 +11,6 @@ library(leaflet.extras)
 library(leafem)
 
 library(mapedit)
-
-library(tidyverse)
 
 library(sf)
 
