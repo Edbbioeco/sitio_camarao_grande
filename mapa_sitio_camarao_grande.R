@@ -60,3 +60,17 @@ amaraji
 ggplot() +
   geom_sf(data = pe, color = "black", fill = "goldenrod") +
   geom_sf(data = amaraji, color = "red", fill = "transparent")
+
+## Shapefile do sítio Camarão Grande ----
+
+### Importar ----
+
+scg <- sf::st_read("shapefile_sitio.shp")
+
+### Visualizar ----
+
+scg
+
+ggplot() +
+  geom_sf(data = amaraji, color = "red", fill = "transparent") +
+  geom_sf(data = scg, color = "red", fill = "transparent")
