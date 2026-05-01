@@ -92,3 +92,20 @@ ggplot() +
   tidyterra::geom_spatraster_rgb(data = scg_sat) +
   geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
   coord_sf(expand = FALSE)
+
+# Mapa ----
+
+## Mapa do Brasil ----
+
+mapa_br <- ggplot() +
+  geom_sf(data = br, color = "black",
+          linewidth = 0.75) +
+  geom_sf(data = pe, color = "black", fill = "goldenrod",
+          linewidth = 0.75) +
+  coord_sf(expand = FALSE,
+           label_graticule = "NW") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5, color = "black")) +
+  ggview::canvas(height = 10, width = 12)
+
+mapa_br
