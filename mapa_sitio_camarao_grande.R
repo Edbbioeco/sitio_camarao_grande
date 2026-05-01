@@ -151,7 +151,7 @@ mapa_scg <- ggplot() +
   coord_sf(xlim = c(-35.4816, -35.47194),
            ylim = c(-8.423959, -8.409974),
            expand = FALSE,
-           label_graticule = "NSE") +
+           label_graticule = "NSEW") +
   ggspatial::annotation_scale(text_cex = 2.5,
                               text_col = "gold",
                               location = "bl",
