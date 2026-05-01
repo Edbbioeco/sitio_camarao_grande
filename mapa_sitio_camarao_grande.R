@@ -97,13 +97,30 @@ ggplot() +
 
 ## Mapa do Brasil ----
 
-mapa_br <- ggplot() +
-  geom_sf(data = br, color = "black",
+mapa_br <- ggplot(data = br) +
+  geom_sf(color = "black",
           linewidth = 0.75) +
   geom_sf(data = pe, color = "black", fill = "goldenrod",
           linewidth = 0.75) +
+  geom_sf(data = amaraji, color = "darkgreen", fill = "transparent",
+          linewidth = 1) +
+  geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+  ggmagnify::geom_magnify(from = c(-35.56295,
+                                   -35.37353,
+                                   -8.456729,
+                                   -8.261121),
+                          to = c(-42,
+                                 -42 + 0.18942*60,
+                                 -33,
+                                 -33 + 0.195608*60),
+                          shape = "rect",
+                          recompute = TRUE,
+                          shadow = TRUE,
+                          linewidth = 1,
+                          expand = FALSE,
+                          proj.fill = "#0000004D") +
   coord_sf(expand = FALSE,
-           label_graticule = "NW") +
+           label_graticule = "NWS") +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5, color = "black")) +
   ggview::canvas(height = 10, width = 12)
