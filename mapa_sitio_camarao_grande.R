@@ -151,7 +151,7 @@ mapa_scg <- ggplot() +
   coord_sf(xlim = c(-35.48309, -35.46937),
            ylim = c(-8.426186, -8.409889),
            expand = FALSE,
-           label_graticule = "NSEW") +
+           label_graticule = "SEW") +
   ggspatial::annotation_scale(text_cex = 2.5,
                               text_col = "gold",
                               location = "br",
@@ -175,12 +175,17 @@ mapa_scg <- ggplot() +
                                 "Amaraji",
                                 "Sítio Camarão Grande")) +
   labs(color = NULL,
-       fill = NULL) +
+       fill = NULL,
+       title = "Sítio Camarão Grande",
+       subtitle = "Localização: Sudoeste do município de Amaraji, Zona da Mata Sul, Pernambuco, Brasil") +
   scale_x_continuous(breaks = seq(-35.480, -35.472, 0.004)) +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5, color = "black"),
-        legend.position = "bottom") +
-  ggview::canvas(height = 10, width = 12)
+        legend.text = element_text(size = 17.5, color = "black"),
+        legend.position = "bottom",
+        plot.title = element_text(size = 17.5, color = "black"),
+        plot.subtitle = element_text(size = 15, color = "black")) +
+  ggview::canvas(height = 12, width = 12)
 
 mapa_scg
 
