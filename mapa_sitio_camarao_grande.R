@@ -10,6 +10,8 @@ library(maptiles)
 
 library(tidyterra)
 
+library(ggmagnify)
+
 library(ggspatial)
 
 library(ggview)
