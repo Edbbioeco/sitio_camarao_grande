@@ -193,8 +193,11 @@ mapa_scg
 
 cowplot::ggdraw(mapa_scg) +
   cowplot::draw_plot(mapa_br,
-                     x = 0.2,
+                     x = 0.15,
                      y = 0.1,
-                     height = 0.325,
-                     width = 0.325) +
-  ggview::canvas(height = 10, width = 12)
+                     height = 0.35,
+                     width = 0.35) +
+  ggview::canvas(height = 12, width = 12)
+
+ggsave(filename = "mapa_sitio_camarao_grande.png",
+       height = 12, width = 12)
