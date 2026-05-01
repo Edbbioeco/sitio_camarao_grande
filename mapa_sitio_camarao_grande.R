@@ -120,7 +120,6 @@ mapa_pe <- ggplot() +
   geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
   coord_sf(xlim = c(-35.56295, -35.37353),
            ylim = c(-8.456729, -8.261121),
-           expand = FALSE,
            label_graticule = "SW") +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5, color = "black")) +
