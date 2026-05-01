@@ -16,3 +16,15 @@ library(ggview)
 
 library(patchwork)
 
+# Dados ----
+
+## Shapefile do Brasil ----
+
+### Importar ----
+
+br <- geobr::read_state(year = 2019)
+
+### Visualizar ----
+
+ggplot() +
+  geom_sf(data = br, color = "black")
