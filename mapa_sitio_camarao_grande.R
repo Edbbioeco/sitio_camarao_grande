@@ -46,3 +46,17 @@ ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = pe, color = "black", fill = "goldenrod")
 
+## Shapefile de Amaraji ----
+
+### Importar ----
+
+amaraji <- geobr::read_municipality() |>
+  dplyr::filter(name_muni == "Amaraji")
+
+### Visuazar ----
+
+amaraji
+
+ggplot() +
+  geom_sf(data = pe, color = "black", fill = "goldenrod") +
+  geom_sf(data = amaraji, color = "red", fill = "transparent")
