@@ -63,6 +63,10 @@ shapefile_sitio
 ggplot() +
   geom_sf(data = shapefile_sitio)
 
+ggplot() +
+  geom_sf(data = amaraji) +
+  geom_sf(data = shapefile_sitio)
+
 ## Exportar ----
 
 shapefile_sitio |>
