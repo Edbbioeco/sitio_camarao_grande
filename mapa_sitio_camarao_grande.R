@@ -99,6 +99,7 @@ ggplot() +
 
 mapa_br <- ggplot(data = br) +
   geom_sf(color = "black",
+          fill = "gray",
           linewidth = 0.75) +
   geom_sf(data = pe, color = "black", fill = "goldenrod",
           linewidth = 0.75) +
@@ -118,7 +119,8 @@ mapa_br <- ggplot(data = br) +
                           shadow = TRUE,
                           linewidth = 1,
                           expand = FALSE,
-                          proj.fill = "#0000004D") +
+                          colour = "#8B0000",
+                          proj.fill = "#8B00004D") +
   coord_sf(expand = FALSE,
            label_graticule = "NWS") +
   theme_minimal() +
@@ -127,19 +129,57 @@ mapa_br <- ggplot(data = br) +
 
 mapa_br
 
-## Mapa de Amaraji ----
+## Mapa do sítio Camarão Grande ----
 
-mapa_pe <- ggplot() +
-  geom_sf(data = pe, color = "black", fill = "goldenrod",
+mapa_scg <- ggplot() +
+  geom_sf(data = br,
+          aes(color = "Brasil",
+              fill = "Brasil"),
           linewidth = 0.75) +
-  geom_sf(data = amaraji, color = "darkgreen", fill = "transparent",
+  geom_sf(data = pe,
+          aes(color = "Pernambuco",
+              fill = "Pernambuco"),
+          linewidth = 0.75) +
+  geom_sf(data = amaraji,
+          aes(color = "Amaraji",
+              fill = "Amaraji"),
           linewidth = 1) +
-  geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
-  coord_sf(xlim = c(-35.56295, -35.37353),
-           ylim = c(-8.456729, -8.261121),
-           label_graticule = "SW") +
+  tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  geom_sf(data = scg,
+          aes(color = "Sítio Camarão Grande",
+              fill = "Sítio Camarão Grande"), linewidth = 2) +
+  coord_sf(xlim = c(-35.4816, -35.47194),
+           ylim = c(-8.423959, -8.409974),
+           expand = FALSE,
+           label_graticule = "NSE") +
+  ggspatial::annotation_scale(text_cex = 2.5,
+                              text_col = "gold",
+                              location = "bl",
+                              bar_cols = c("black", "gold"),
+                              line_width = 2,
+                              height = unit(0.5, "cm")) +
+  scale_color_manual(values = c("Brasil" = "black",
+                                "Pernambuco" = "black",
+                                "Amaraji" = "darkgreen",
+                                "Sítio Camarão Grande" = "red"),
+                     breaks = c("Brasil",
+                                "Pernambuco",
+                                "Amaraji",
+                                "Sítio Camarão Grande")) +
+  scale_fill_manual(values = c("Brasil" = "gray",
+                               "Pernambuco" = "gold",
+                               "Amaraji" = "transparent",
+                               "Sítio Camarão Grande" = "transparent"),
+                     breaks = c("Brasil",
+                                "Pernambuco",
+                                "Amaraji",
+                                "Sítio Camarão Grande")) +
+  labs(color = NULL,
+       fill = NULL) +
+  scale_x_continuous(breaks = seq(-35.480, -35.472, 0.004)) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 17.5, color = "black")) +
+  theme(axis.text = element_text(size = 17.5, color = "black"),
+        legend.position = "bottom") +
   ggview::canvas(height = 10, width = 12)
 
-mapa_pe
+mapa_scg
