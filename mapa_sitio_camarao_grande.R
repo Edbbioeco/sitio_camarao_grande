@@ -16,7 +16,7 @@ library(ggspatial)
 
 library(ggview)
 
-library(patchwork)
+library(cowplot)
 
 # Dados ----
 
