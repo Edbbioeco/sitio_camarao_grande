@@ -74,3 +74,20 @@ scg
 ggplot() +
   geom_sf(data = amaraji, color = "red", fill = "transparent") +
   geom_sf(data = scg, color = "red", fill = "transparent")
+
+## Imagem de satélite do Sítio Camarão Grande ----
+
+### Baixar ----
+
+scg_sat <- scg |>
+  maptiles::get_tiles(provider = "Esri.WorldImagery",
+                      zoom = 17)
+
+### Visualizar ----
+
+scg_sat
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+  coord_sf(expand = FALSE)
