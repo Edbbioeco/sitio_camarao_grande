@@ -81,7 +81,8 @@ ggplot() +
 
 scg_sat <- scg |>
   maptiles::get_tiles(provider = "Esri.WorldImagery",
-                      zoom = 17)
+                      zoom = 17,
+                      crop = TRUE)
 
 ### Visualizar ----
 
