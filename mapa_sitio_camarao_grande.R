@@ -125,8 +125,7 @@ mapa_br <- ggplot(data = br) +
                           proj.fill = "#8B00004D") +
   coord_sf(expand = FALSE,
            label_graticule = "NWS") +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 17.5, color = "black")) +
+  theme_void() +
   ggview::canvas(height = 10, width = 12)
 
 mapa_br
@@ -185,3 +184,10 @@ mapa_scg <- ggplot() +
   ggview::canvas(height = 10, width = 12)
 
 mapa_scg
+
+## Unir os mapas ----
+
+(mapa_br + mapa_scg) +
+  patchwork::plot_layout(guides = "collect") &
+  theme(legend.position = "bottom") &
+  ggview::canvas(height = 10, width = 12)
