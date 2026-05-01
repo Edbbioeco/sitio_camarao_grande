@@ -148,13 +148,13 @@ mapa_scg <- ggplot() +
   geom_sf(data = scg,
           aes(color = "Sítio Camarão Grande",
               fill = "Sítio Camarão Grande"), linewidth = 2) +
-  coord_sf(xlim = c(-35.4816, -35.47194),
-           ylim = c(-8.423959, -8.409974),
+  coord_sf(xlim = c(-35.48309, -35.46937),
+           ylim = c(-8.426186, -8.409889),
            expand = FALSE,
            label_graticule = "NSEW") +
   ggspatial::annotation_scale(text_cex = 2.5,
                               text_col = "gold",
-                              location = "bl",
+                              location = "br",
                               bar_cols = c("black", "gold"),
                               line_width = 2,
                               height = unit(0.5, "cm")) +
