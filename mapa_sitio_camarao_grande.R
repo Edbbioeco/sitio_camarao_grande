@@ -153,7 +153,7 @@ mapa_scg <- ggplot() +
            expand = FALSE,
            label_graticule = "SEW") +
   ggspatial::annotation_scale(text_cex = 2.5,
-                              text_col = "gold",
+                              text_col = "black",
                               location = "br",
                               bar_cols = c("black", "gold"),
                               line_width = 2,
