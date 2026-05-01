@@ -1,5 +1,7 @@
 # Pacotes ----
 
+library(geobr)
+
 library(sf)
 
 library(tidyverse)
@@ -13,3 +15,4 @@ library(ggspatial)
 library(ggview)
 
 library(patchwork)
+
