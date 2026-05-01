@@ -83,8 +83,7 @@ ggplot() +
 
 scg_sat <- scg |>
   maptiles::get_tiles(provider = "Esri.WorldImagery",
-                      zoom = 17,
-                      crop = TRUE)
+                      zoom = 17)
 
 ### Visualizar ----
 
@@ -187,7 +186,10 @@ mapa_scg
 
 ## Unir os mapas ----
 
-(mapa_br + mapa_scg) +
-  patchwork::plot_layout(guides = "collect") &
-  theme(legend.position = "bottom") &
+cowplot::ggdraw(mapa_scg) +
+  cowplot::draw_plot(mapa_br,
+                     x = 0.08,
+                     y = 0.55,
+                     height = 0.425,
+                     width = 0.425) +
   ggview::canvas(height = 10, width = 12)
