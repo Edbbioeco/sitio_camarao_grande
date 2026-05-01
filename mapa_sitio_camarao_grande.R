@@ -188,8 +188,8 @@ mapa_scg
 
 cowplot::ggdraw(mapa_scg) +
   cowplot::draw_plot(mapa_br,
-                     x = 0.08,
-                     y = 0.55,
-                     height = 0.425,
-                     width = 0.425) +
+                     x = 0.2,
+                     y = 0.1,
+                     height = 0.325,
+                     width = 0.325) +
   ggview::canvas(height = 10, width = 12)
