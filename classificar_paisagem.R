@@ -139,3 +139,16 @@ df_valores |>
                                 "Corpos Hídricos" = "royalblue")) +
   theme_classic() +
   theme(legend.position = "bottom")
+
+## Escolher o melhor modelo ----
+
+escolhido_modelo <- df_valores |>
+  dplyr::group_by(modelo_id) |>
+  dplyr::slice(1) |>
+  dplyr::arrange(OOB) |>
+  dplyr::select(OOB, modelo_id, `N-Tree`) |>
+  dplyr::ungroup() |>
+  dplyr::slice(1) |>
+  dplyr::pull(modelo_id)
+
+escolhido_modelo
