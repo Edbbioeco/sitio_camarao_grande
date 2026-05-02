@@ -228,3 +228,49 @@ ggplot() +
                                "Corpos Hídricos" = "royalblue"),
                     na.translate = FALSE)
 
+# Mapa ----
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  tidyterra::geom_spatraster(data = scg_ensemble) +
+  geom_sf(data = scg,
+          aes(color = "Sítio Camarão Grande"),
+          fill = "transparent",
+          linewidth = 1) +
+  coord_sf(expand = FALSE) +
+  scale_fill_manual(values = c("Vegetação Nativa" = "darkgreen",
+                               "Plantação" = "limegreen",
+                               "Solo Exposto" = "goldenrod4",
+                               "Corpos Hídricos" = "royalblue"),
+                    breaks = c("Vegetação Nativa",
+                               "Plantação",
+                               "Solo Exposto",
+                               "Corpos Hídricos"),
+                    na.translate = FALSE) +
+  scale_color_manual(values = c("red")) +
+  guides(color = guide_legend(order = 1)) +
+  coord_sf(xlim = c(-35.48161, -35.47193),
+           ylim = c(-8.42396, -8.409975),
+           expand = FALSE,
+           label_graticule = "SEW") +
+  labs(color = NULL,
+       fill = NULL,
+       title = "Sítio Camarão Grande",
+       subtitle = "Classificação do uso e cobertura do solo") +
+  scale_x_continuous(breaks = seq(-35.480, -35.472, 0.004)) +
+  ggspatial::annotation_scale(text_cex = 2.5,
+                              text_col = "gold",
+                              location = "bl",
+                              bar_cols = c("black", "gold"),
+                              line_width = 2,
+                              height = unit(0.5, "cm")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5, color = "black"),
+        legend.text = element_text(size = 17.5, color = "black"),
+        legend.position = "bottom",
+        plot.title = element_text(size = 17.5, color = "black"),
+        plot.subtitle = element_text(size = 15, color = "black")) +
+  ggview::canvas(height = 12, width = 12)
+
+ggsave(filename = "uso_cobertura_solo.png",
+       height = 12, width = 12)
