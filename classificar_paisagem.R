@@ -75,6 +75,18 @@ valores
 
 ## Criar io modelo ----
 
-modelo <- randomForest::randomForest(Classe ~ .,
-                                     data = valores,
-                                     ntree = 500)
+id <- 1:100
+
+rodar_modelos <- function(id){
+
+  modelo <- randomForest::randomForest(Classe ~ .,
+                                       data = valores,
+                                       ntree = 1000)
+
+  assign(paste0("modelo_", id),
+         modelo,
+         envir = globalenv())
+
+}
+
+purrr::map(id, rodar_modelos)
