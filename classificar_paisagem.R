@@ -156,7 +156,8 @@ escolhido_modelo
 ## Exportar modelç ----
 
 escolhido_modelo |>
-  mget(envir = globalenv()) |>
+  mget(envir = globalenv()) %>%
+  .[[1]] |>
   saveRDS("modelo_randomforest.rds")
 
 escolhido_modelo <- readRDS("modelo_randomforest.rds")
