@@ -63,11 +63,18 @@ ggplot() +
 
 # Modelo de classificação ----
 
-### Valores dos pontos ----
+## Valores dos pontos ----
 
 valores <- scg_sat |>
   terra::extract(pontos) |>
   dplyr::mutate(ID = pontos$Classe) |>
-  dplyr::rename("Classe" = ID)
+  dplyr::rename("Classe" = ID) |>
+  dplyr::mutate(Classe = Classe |> as.factor())
 
 valores
+
+## Criar io modelo ----
+
+modelo <- randomForest::randomForest(Classe ~ .,
+                                     data = valores,
+                                     ntree = 500)
