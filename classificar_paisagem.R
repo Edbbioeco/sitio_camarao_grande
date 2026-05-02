@@ -28,3 +28,17 @@ scg
 
 ggplot() +
   geom_sf(data = scg, color = "black")
+
+## Shapefile de pontos de treino ----
+
+### Importar ----
+
+pontos <- sf::st_read("pontos_treino.shp")
+
+### Visualizar ----
+
+pontos
+
+ggplot() +
+  geom_sf(data = scg, color = "black") +
+  geom_sf(data = pontos, aes(color = Classe))
