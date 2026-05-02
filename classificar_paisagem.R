@@ -75,13 +75,13 @@ valores
 
 ## Criar io modelo ----
 
-id <- 1:100
+id <- 1:500
 
 rodar_modelos <- function(id){
 
   modelo <- randomForest::randomForest(Classe ~ .,
                                        data = valores,
-                                       ntree = 1000)
+                                       ntree = 1500)
 
   assign(paste0("modelo_", id),
          modelo,
