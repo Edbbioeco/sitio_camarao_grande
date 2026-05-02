@@ -162,3 +162,17 @@ escolhido_modelo |>
 escolhido_modelo <- readRDS("modelo_randomforest.rds")
 
 escolhido_modelo
+
+## Recortar o raster ----
+
+scg_sat_crop <- scg_sat |>
+  terra::crop(scg) |>
+  terra::mask(scg)
+
+scg_sat_crop
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = scg_sat_crop) +
+  geom_sf(data = scg, color = "gold", fill = "transparent") +
+  geom_sf(data = pontos, aes(color = Classe)) +
+  coord_sf(expand = FALSE)
