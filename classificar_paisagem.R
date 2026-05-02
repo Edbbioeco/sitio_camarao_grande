@@ -126,7 +126,7 @@ df_valores |>
               alpha = 0.3) +
   geom_line(aes(y = mean)) +
   labs(Y = "Error rate") +
-  scale_x_continuous(breaks = seq(0, 1000, 100)) +
+  scale_x_continuous(breaks = seq(0, 1500, 100)) +
   scale_color_manual(values = c("OOB" = "black",
                                 "Vegetação Nativa" = "darkgreen",
                                 "Plantação" = "limegreen",
