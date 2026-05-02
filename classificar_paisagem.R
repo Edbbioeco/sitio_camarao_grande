@@ -180,17 +180,51 @@ ggplot() +
 
 ## Testar e classificar ----
 
-scg_class <- terra::predict(scg_sat_crop, escolhido_modelo)
+id <- 1:10
 
-scg_class
+classificar_raster <- function(id){
+
+  scg_class <- terra::predict(scg_sat_crop, escolhido_modelo)
+
+  assign(paste0("scg_class_", id),
+         scg_class,
+         envir = globalenv())
+
+}
+
+purrr::map(id, classificar_raster)
+
+scg_unidos <- ls(pattern = "scg_class_") |>
+  mget(envir = globalenv()) |>
+  terra::rast()
+
+moda <- function(x){
+
+  ux <- unique(x)
+
+  ux <- ux[!is.na(ux)]
+
+  ux[match(x, ux) |>
+       tabulate() |>
+       which.max()]
+
+}
+
+scg_ensemble <- terra::app(scg_unidos, moda)
+
+terra::set.cats(scg_ensemble,
+                value =  scg_unidos[[1]] |> terra::levels())
+
+scg_ensemble
 
 ggplot() +
   tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  tidyterra::geom_spatraster(data = scg_ensemble) +
   geom_sf(data = scg, color = "red", fill = "transparent") +
   coord_sf(expand = FALSE) +
   scale_fill_manual(values = c("Vegetação Nativa" = "darkgreen",
-                                "Plantação" = "limegreen",
-                                "Solo Exposto" = "goldenrod",
-                                "Corpos Hídricos" = "royalblue"),
+                               "Plantação" = "limegreen",
+                               "Solo Exposto" = "goldenrod",
+                               "Corpos Hídricos" = "royalblue"),
                     na.translate = FALSE)
 
