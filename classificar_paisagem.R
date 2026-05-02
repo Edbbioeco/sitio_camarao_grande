@@ -177,3 +177,20 @@ ggplot() +
   geom_sf(data = scg, color = "gold", fill = "transparent") +
   geom_sf(data = pontos, aes(color = Classe)) +
   coord_sf(expand = FALSE)
+
+## Testar e classificar ----
+
+scg_class <- terra::predict(scg_sat_crop, escolhido_modelo)
+
+scg_class
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  geom_sf(data = scg, color = "red", fill = "transparent") +
+  coord_sf(expand = FALSE) +
+  scale_fill_manual(values = c("Vegetação Nativa" = "darkgreen",
+                                "Plantação" = "limegreen",
+                                "Solo Exposto" = "goldenrod",
+                                "Corpos Hídricos" = "royalblue"),
+                    na.translate = FALSE)
+
