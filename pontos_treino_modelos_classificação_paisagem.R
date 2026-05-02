@@ -90,3 +90,27 @@ ggplot() +
   geom_sf(data = scg, color = "black") +
   geom_sf(data = veg_nat, color = "darkgreen") +
   geom_sf(data = plantacao, color = "limegreen")
+
+### Solo exposto ----
+
+solo <- mapa |>
+  mapedit::editMap(targetGroup = "Draw",
+                   polylineOptions = TRUE,
+                   polygonOptions = TRUE,
+                   circleOptions = TRUE,
+                   rectangleOptions = TRUE,
+                   markerOptions = TRUE,
+                   circleMarkerOptions = TRUE,
+                   editOptions = leaflet.extras::editToolbarOptions())
+
+solo <- solo$drawn |>
+  dplyr::mutate(Classe = "Solo Exposto")
+
+solo
+
+ggplot() +
+  geom_sf(data = scg, color = "black") +
+  geom_sf(data = veg_nat, color = "darkgreen") +
+  geom_sf(data = plantacao, color = "limegreen") +
+  geom_sf(data = solo, color = "goldenrod")
+
