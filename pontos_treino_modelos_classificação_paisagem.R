@@ -138,3 +138,15 @@ ggplot() +
   geom_sf(data = solo, color = "goldenrod") +
   geom_sf(data = corpos_hid, color = "royalblue")
 
+## Unir os pontos em um único shapefile ----
+
+pontos_sh <- c("veg_nat",
+               "plantacao",
+               "solo",
+               "corpos_hid") |>
+  mget(envir = globalenv()) |>
+  dplyr::bind_rows()
+
+pontos_sh
+
+
