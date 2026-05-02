@@ -12,6 +12,10 @@ library(terra)
 
 library(randomForest)
 
+library(ggspatial)
+
+library(ggview)
+
 # Dados ----
 
 ## Shapefile do Sítio Camarão Grande ----
