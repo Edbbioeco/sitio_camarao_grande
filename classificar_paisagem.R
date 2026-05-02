@@ -42,3 +42,21 @@ pontos
 ggplot() +
   geom_sf(data = scg, color = "black") +
   geom_sf(data = pontos, aes(color = Classe))
+
+## Imagem de satélite ----
+
+### Baixar ----
+
+scg_sat <- scg |>
+  maptiles::get_tiles(provider = "Esri.WorldImagery",
+                      zoom = 17)
+
+### Visualizar ----
+
+scg_sat
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = scg_sat) +
+  geom_sf(data = scg, color = "gold", fill = "transparent") +
+  geom_sf(data = pontos, aes(color = Classe)) +
+  coord_sf(expand = FALSE)
