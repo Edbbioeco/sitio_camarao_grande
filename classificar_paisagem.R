@@ -152,3 +152,13 @@ escolhido_modelo <- df_valores |>
   dplyr::pull(modelo_id)
 
 escolhido_modelo
+
+## Exportar modelç ----
+
+escolhido_modelo |>
+  mget(envir = globalenv()) |>
+  saveRDS("modelo_randomforest.rds")
+
+escolhido_modelo <- readRDS("modelo_randomforest.rds")
+
+escolhido_modelo
