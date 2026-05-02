@@ -114,3 +114,27 @@ ggplot() +
   geom_sf(data = plantacao, color = "limegreen") +
   geom_sf(data = solo, color = "goldenrod")
 
+### Corpos hídricos ----
+
+corpos_hid <- mapa |>
+  mapedit::editMap(targetGroup = "Draw",
+                   polylineOptions = TRUE,
+                   polygonOptions = TRUE,
+                   circleOptions = TRUE,
+                   rectangleOptions = TRUE,
+                   markerOptions = TRUE,
+                   circleMarkerOptions = TRUE,
+                   editOptions = leaflet.extras::editToolbarOptions())
+
+corpos_hid <- corpos_hid$drawn |>
+  dplyr::mutate(Classe = "Corpos Hídricos")
+
+corpos_hid
+
+ggplot() +
+  geom_sf(data = scg, color = "black") +
+  geom_sf(data = veg_nat, color = "darkgreen") +
+  geom_sf(data = plantacao, color = "limegreen") +
+  geom_sf(data = solo, color = "goldenrod") +
+  geom_sf(data = corpos_hid, color = "royalblue")
+
