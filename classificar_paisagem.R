@@ -135,14 +135,28 @@ df_valores |>
                                 "Vegetação Nativa" = "darkgreen",
                                 "Plantação" = "limegreen",
                                 "Solo Exposto" = "goldenrod",
-                                "Corpos Hídricos" = "royalblue")) +
+                                "Corpos Hídricos" = "royalblue"),
+                     breaks = c("OOB",
+                                "Vegetação Nativa",
+                                "Plantação",
+                                "Solo Exposto",
+                                "Corpos Hídricos")) +
   scale_fill_manual(values = c("OOB" = "black",
                                 "Vegetação Nativa" = "darkgreen",
                                 "Plantação" = "limegreen",
                                 "Solo Exposto" = "goldenrod",
-                                "Corpos Hídricos" = "royalblue")) +
+                                "Corpos Hídricos" = "royalblue"),
+                    breaks = c("OOB",
+                               "Vegetação Nativa",
+                               "Plantação",
+                               "Solo Exposto",
+                               "Corpos Hídricos")) +
   theme_classic() +
-  theme(legend.position = "bottom")
+  theme(axis.text = element_text(size = 17.5, color = "black"),
+        axis.title = element_text(size = 17.5, color = "black"),
+        legend.text = element_text(size = 17.5, color = "black"),
+        legend.title = element_text(size = 17.5, color = "black"),
+        legend.position = "bottom")
 
 ## Escolher o melhor modelo ----
 
