@@ -90,3 +90,52 @@ rodar_modelos <- function(id){
 }
 
 purrr::map(id, rodar_modelos)
+
+## Avaliar os modelos ----
+
+df_valores <- ls(pattern = "modelo_") |>
+  mget(envir = globalenv()) |>
+  purrr::imap(\(modelo, id){
+
+    modelo$err.rate |>
+      as.data.frame() |>
+      dplyr::mutate(modelo_id = id,
+                    ntree     = 1:nrow(modelo$err.rate))
+
+  }) |>
+  dplyr::bind_rows() |>
+  dplyr::rename("N-Tree" = ntree)
+
+df_valores
+
+df_valores |>
+  tidyr::pivot_longer(cols = 1:5,
+                      names_to = "Error type",
+                      values_to = "Error") |>
+  dplyr::group_by(`N-Tree`, `Error type`) |>
+  dplyr::summarise(mean  = mean(Error),
+                   lower = min(Error),
+                   upper = max(Error),
+                   .groups = "drop") |>
+  ggplot(aes(x = `N-Tree`,
+                  color = `Error type`,
+                  fill = `Error type`)) +
+  geom_ribbon(aes(ymin = lower,
+                  ymax = upper,
+                  color = NULL),
+              alpha = 0.3) +
+  geom_line(aes(y = mean)) +
+  labs(Y = "Error rate") +
+  scale_x_continuous(breaks = seq(0, 1000, 100)) +
+  scale_color_manual(values = c("OOB" = "black",
+                                "Vegetação Nativa" = "darkgreen",
+                                "Plantação" = "limegreen",
+                                "Solo Exposto" = "goldenrod",
+                                "Corpos Hídricos" = "royalblue")) +
+  scale_fill_manual(values = c("OOB" = "black",
+                                "Vegetação Nativa" = "darkgreen",
+                                "Plantação" = "limegreen",
+                                "Solo Exposto" = "goldenrod",
+                                "Corpos Hídricos" = "royalblue")) +
+  theme_classic() +
+  theme(legend.position = "bottom")
