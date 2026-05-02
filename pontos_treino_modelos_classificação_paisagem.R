@@ -63,6 +63,30 @@ veg_nat <- mapa |>
 veg_nat <- veg_nat$drawn |>
   dplyr::mutate(Classe = "Vegetação Nativa")
 
+veg_nat
+
 ggplot() +
   geom_sf(data = scg, color = "black") +
   geom_sf(data = veg_nat, color = "black")
+
+### Área de plantação ----
+
+plantacao <- mapa |>
+  mapedit::editMap(targetGroup = "Draw",
+                   polylineOptions = TRUE,
+                   polygonOptions = TRUE,
+                   circleOptions = TRUE,
+                   rectangleOptions = TRUE,
+                   markerOptions = TRUE,
+                   circleMarkerOptions = TRUE,
+                   editOptions = leaflet.extras::editToolbarOptions())
+
+plantacao <- plantacao$drawn |>
+  dplyr::mutate(Classe = "Plantação")
+
+plantacao
+
+ggplot() +
+  geom_sf(data = scg, color = "black") +
+  geom_sf(data = veg_nat, color = "darkgreen") +
+  geom_sf(data = plantacao, color = "limegreen")
