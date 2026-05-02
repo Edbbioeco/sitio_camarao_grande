@@ -60,3 +60,14 @@ ggplot() +
   geom_sf(data = scg, color = "gold", fill = "transparent") +
   geom_sf(data = pontos, aes(color = Classe)) +
   coord_sf(expand = FALSE)
+
+# Modelo de classificação ----
+
+### Valores dos pontos ----
+
+valores <- scg_sat |>
+  terra::extract(pontos) |>
+  dplyr::mutate(ID = pontos$Classe) |>
+  dplyr::rename("Classe" = ID)
+
+valores
