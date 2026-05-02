@@ -2,6 +2,8 @@
 
 library(sf)
 
+library(tidyverse)
+
 library(leaflet)
 
 library(leaflet.extras)
