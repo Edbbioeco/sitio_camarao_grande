@@ -149,4 +149,6 @@ pontos_sh <- c("veg_nat",
 
 pontos_sh
 
+### Exportar ----
 
+pontos_sh |> sf::st_write("pontos_treino.shp")
