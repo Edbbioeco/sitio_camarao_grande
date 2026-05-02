@@ -45,3 +45,24 @@ mapa <- leaflet::leaflet() |>
                        fillOpacity = 0)
 
 mapa
+
+## Gerar os pontos ----
+
+### Vegetação nativa ----
+
+veg_nat <- mapa |>
+  mapedit::editMap(targetGroup = "Draw",
+                   polylineOptions = TRUE,
+                   polygonOptions = TRUE,
+                   circleOptions = TRUE,
+                   rectangleOptions = TRUE,
+                   markerOptions = TRUE,
+                   circleMarkerOptions = TRUE,
+                   editOptions = leaflet.extras::editToolbarOptions())
+
+veg_nat <- veg_nat$drawn |>
+  dplyr::mutate(Classe = "Vegetação Nativa")
+
+ggplot() +
+  geom_sf(data = scg, color = "black") +
+  geom_sf(data = veg_nat, color = "black")
