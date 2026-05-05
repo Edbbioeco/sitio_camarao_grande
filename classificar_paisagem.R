@@ -22,11 +22,9 @@ library(ggview)
 
 ### Importar ----
 
-## Importar ----
-
 scg <- sf::st_read("shapefile_sitio.shp")
 
-## Visualizar ----
+### Visualizar ----
 
 scg
 
@@ -106,7 +104,7 @@ df_valores <- modelos |>
   }) |>
   dplyr::bind_rows() |>
   dplyr::rename("N-Tree" = ntree)
-b
+
 df_valores
 
 df_valores |>
