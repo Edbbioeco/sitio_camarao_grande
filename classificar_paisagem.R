@@ -97,8 +97,7 @@ modelos
 
 ## Avaliar os modelos ----
 
-df_valores <- ls(pattern = "modelo_") |>
-  mget(envir = globalenv()) |>
+df_valores <- modelos |>
   purrr::imap(\(modelo, id){
 
     modelo$err.rate |>
