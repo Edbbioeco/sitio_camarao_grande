@@ -85,7 +85,7 @@ modelos <- purrr::map(id, \(id){
                                        data = valores,
                                        ntree = 1500)
 
-})
+  })
 
 names(modelos) <- paste0("modelo_", id)
 
