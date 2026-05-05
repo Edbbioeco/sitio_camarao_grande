@@ -225,10 +225,10 @@ moda <- function(x){
 
 }
 
-scg_ensemble <- terra::app(scg_unidos, moda)
+scg_ensemble <- terra::app(scg_class, moda)
 
 terra::set.cats(scg_ensemble,
-                value =  scg_unidos[[1]] |> terra::levels())
+                value =  scg_class[[1]] |> terra::levels())
 
 scg_ensemble
 
