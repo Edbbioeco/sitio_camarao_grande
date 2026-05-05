@@ -87,13 +87,13 @@ rodar_modelos <- function(id){
                                        data = valores,
                                        ntree = 1500)
 
-  assign(paste0("modelo_", id),
-         modelo,
-         envir = globalenv())
-
 }
 
-purrr::map(id, rodar_modelos)
+modelos <- purrr::map(id, rodar_modelos)
+
+names(modelos) <- paste0("modelo_", id)
+
+modelos
 
 ## Avaliar os modelos ----
 
