@@ -81,15 +81,13 @@ valores
 
 id <- 1:500
 
-rodar_modelos <- function(id){
+modelos <- purrr::map(id, \(id){
 
   modelo <- randomForest::randomForest(Classe ~ .,
                                        data = valores,
                                        ntree = 1500)
 
-}
-
-modelos <- purrr::map(id, rodar_modelos)
+})
 
 names(modelos) <- paste0("modelo_", id)
 
@@ -108,7 +106,7 @@ df_valores <- modelos |>
   }) |>
   dplyr::bind_rows() |>
   dplyr::rename("N-Tree" = ntree)
-
+b
 df_valores
 
 df_valores |>
