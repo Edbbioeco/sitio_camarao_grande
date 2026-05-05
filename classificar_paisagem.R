@@ -201,19 +201,17 @@ id <- 1:10
 
 classificar_raster <- function(id){
 
-  scg_class <- terra::predict(scg_sat_crop, escolhido_modelo)
-
-  assign(paste0("scg_class_", id),
-         scg_class,
-         envir = globalenv())
+  scg_class <- terra::predict(scg_sat_crop,
+                              escolhido_modelo)
 
 }
 
-purrr::map(id, classificar_raster)
-
-scg_unidos <- ls(pattern = "scg_class_") |>
-  mget(envir = globalenv()) |>
+scg_class <- purrr::map(id, classificar_raster) |>
   terra::rast()
+
+names(scg_class) <- paste0("scg_class_", id)
+
+scg_class
 
 moda <- function(x){
 
