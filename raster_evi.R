@@ -31,7 +31,7 @@ ggplot() +
 
 ## Autenticar usuário ----
 
-OAuthClient <- GetOAuthClient(id = Sys.getenv("CDSE_ID"),
-                              secret = Sys.getenv("CDSE_SECRET"))
+OAuthClient <- CDSE::GetOAuthClient(id = Sys.getenv("CDSE_ID"),
+                                    secret = Sys.getenv("CDSE_SECRET"))
 
 OAuthClient
