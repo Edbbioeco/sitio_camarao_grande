@@ -38,11 +38,15 @@ OAuthClient
 
 ## Catálogo ----
 
-CDSE::SearchCatalog(aoi = scg,
-                    from = "2020-01-01", to = "2026-05-01",
-                    collection = "sentinel-2-l2a",
-                    with_geometry = TRUE,
-                    client = OAuthClient)
+catalogo <- CDSE::SearchCatalog(aoi = scg,
+                                from = "2020-01-01", to = "2026-05-01",
+                                collection = "sentinel-2-l2a",
+                                with_geometry = FALSE,
+                                client = OAuthClient)
+
+catalogo
+
+catalogo |> dplyr::glimpse()
 
 ## Evalscript ----
 
