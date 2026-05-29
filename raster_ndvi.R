@@ -102,7 +102,7 @@ rasters <- purrr::map(list.files(path = "./ndvi/",
                       terra::rast) |>
   setNames(list.files(path = "./ndvi/",
                       full.names = TRUE) |>
-             stringr::str_remove("./ndvi/|.tif"))
+             stringr::str_remove_all("./ndvi/|.tif"))
 
 rasters
 
