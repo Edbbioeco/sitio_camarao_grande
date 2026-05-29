@@ -122,5 +122,9 @@ purrr::map2(rasters, nomes, \(raster, nome){
                                      "#A1FA4F",
                                      "#377E47"),
                          limits = c(-1, 1)) +
-    labs(title = nome)
-})
+    geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+    labs(title = nome,
+         fill = "NDVI")
+
+  },
+  .progress = TRUE)
