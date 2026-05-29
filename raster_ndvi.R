@@ -140,8 +140,14 @@ mapas <- purrr::map2(rasters, nomes, \(raster, nome){
                                      "#FFFD55",
                                      "#A1FA4F",
                                      "#377E47"),
-                         limits = c(-1, 1)) +
+                         limits = c(-1, 1),
+                         guide = guide_colourbar(title.position = "top",
+                                                 title.hjust = 0.5,
+                                                 barwidth = 20,
+                                                 frame.colour = "black",
+                                                 ticks.colour = "black")) +
     geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+    scale_x_continuous(breaks = seq(-35.48256, -35.471, 0.005)) +
     labs(title = nome,
          fill = "NDVI") +
     coord_sf(expand = FALSE) +
@@ -149,6 +155,7 @@ mapas <- purrr::map2(rasters, nomes, \(raster, nome){
     theme(axis.text = element_text(color = "black", size = 20),
           legend.text = element_text(color = "black", size = 20),
           legend.title = element_text(color = "black", size = 20),
+          legend.position = "bottom",
           plot.title = element_text(color = "black", size = 20))
 
   },
