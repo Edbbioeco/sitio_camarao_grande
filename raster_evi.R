@@ -43,3 +43,12 @@ CDSE::SearchCatalog(aoi = scg,
                     collection = "sentinel-2-l2a",
                     with_geometry = TRUE,
                     client = OAuthClient)
+
+## Evalscript ----
+
+evalscript <- rsi::spectral_indices() |>
+  dplyr::filter(short_name == "NDVI") |>
+  CDSE::MakeEvalScript(constellation = "landsat") |>
+  paste(collapse = "\n")
+
+evalscript
