@@ -105,3 +105,22 @@ rasters <- purrr::map(list.files(path = "./ndvi/",
              stringr::str_remove(".tif"))
 
 rasters
+
+## Visualizar ----
+
+nomes <- rasters |> names()
+
+nomes
+
+purrr::map2(rasters, nomes, \(raster, nome){
+
+  ggplot() +
+    tidyterra::geom_spatraster(data = raster) +
+    scale_fill_gradientn(colours = c("#3A0603",
+                                     "#F08650",
+                                     "#FFFD55",
+                                     "#A1FA4F",
+                                     "#377E47"),
+                         limits = c(-1, 1)) +
+    labs(title = nome)
+})
