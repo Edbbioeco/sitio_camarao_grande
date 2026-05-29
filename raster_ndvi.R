@@ -128,3 +128,38 @@ purrr::map2(rasters, nomes, \(raster, nome){
 
   },
   .progress = TRUE)
+
+## Exportar ----
+
+mapas <- purrr::map2(rasters, nomes, \(raster, nome){
+
+  ggplot() +
+    tidyterra::geom_spatraster(data = raster) +
+    scale_fill_gradientn(colours = c("#3A0603",
+                                     "#F08650",
+                                     "#FFFD55",
+                                     "#A1FA4F",
+                                     "#377E47"),
+                         limits = c(-1, 1)) +
+    geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+    labs(title = nome,
+         fill = "NDVI") +
+    coord_sf(expand = FALSE) +
+    theme_minimal() +
+    theme(axis.text = element_text(color = "black", size = 20),
+          legend.text = element_text(color = "black", size = 20),
+          legend.title = element_text(color = "black", size = 20),
+          plot.title = element_text(color = "black", size = 20))
+
+  },
+  .progress = TRUE)
+
+dir.create("./mapas_ndvi")
+
+purrr::map2(mapas,
+            nomes,
+            ~ ggsave(plot = .x,
+                     filename = paste0("./mapas_ndvi/mapa_", .y, ".png"),
+                     height = 10,
+                     width = 12),
+            .progress = TRUE)
