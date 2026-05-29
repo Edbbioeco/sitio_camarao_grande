@@ -56,3 +56,19 @@ evalscript <- rsi::spectral_indices() |>
   paste(collapse = "\n")
 
 evalscript
+
+## Períodos ----
+
+periodos <- catalogo |>
+  dplyr::mutate(ano = acquisitionDate |> lubridate::year(),
+                mes = acquisitionDate |> lubridate::month(),
+                ano_mes = paste0(ano,
+                                 "-",
+                                 mes)) |>
+  dplyr::group_by(mes, ano) |>
+  dplyr::slice_head() |>
+  dplyr::arrange(ano, mes) |>
+  as.data.frame() |>
+  dplyr::pull(acquisitionDate)
+
+periodos
