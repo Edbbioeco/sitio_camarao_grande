@@ -92,3 +92,16 @@ purrr::map(periodos, \(periodo){
                  client = OAuthClient)
   },
   .progress = TRUE)
+
+# Mapas ----
+
+## Importar rasters ----
+
+rasters <- purrr::map(list.files(path = "./ndvi/",
+                                 full.names = TRUE),
+                      terra::rast) |>
+  setNames(list.files(path = "./ndvi/",
+                      full.names = TRUE) |>
+             stringr::str_remove(".tif"))
+
+rasters
