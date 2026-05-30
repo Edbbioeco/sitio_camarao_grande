@@ -35,3 +35,15 @@ OAuthClient <- CDSE::GetOAuthClient(id = Sys.getenv("CDSE_ID"),
                                     secret = Sys.getenv("CDSE_SECRET"))
 
 OAuthClient
+
+## Catálogo ----
+
+catalogo <- CDSE::SearchCatalog(aoi = scg,
+                                from = "2020-01-01", to = "2026-05-01",
+                                collection = "sentinel-2-l2a",
+                                with_geometry = FALSE,
+                                client = OAuthClient)
+
+catalogo
+
+catalogo |> dplyr::glimpse()
