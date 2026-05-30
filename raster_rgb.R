@@ -6,8 +6,6 @@ library(tidyverse)
 
 library(CDSE)
 
-library(rsi)
-
 library(terra)
 
 library(tidyterra)
