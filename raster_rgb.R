@@ -103,3 +103,26 @@ rasters <- purrr::map(list.files(path = "./rgb/",
              stringr::str_remove_all("./rgb/|.tif"))
 
 rasters
+
+## Visualizar ----
+
+nomes <- rasters |> names()
+
+nomes
+
+purrr::map2(rasters, nomes, \(raster, nome){
+
+  ggplot() +
+    tidyterra::geom_spatraster_rgb(data = raster) +
+    geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+    scale_x_continuous(breaks = seq(-35.48256, -35.471, 0.005)) +
+    labs(title = nome,
+         fill = "NDVI") +
+    coord_sf(expand = FALSE) +
+    theme_minimal() +
+    theme(axis.text = element_text(color = "black", size = 20),
+          plot.title = element_text(color = "black", size = 20)) +
+    ggview::canvas(height = 10, width = 12)
+
+  },
+  .progress = TRUE)
