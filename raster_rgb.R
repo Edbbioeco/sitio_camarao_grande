@@ -38,7 +38,7 @@ OAuthClient
 
 catalogo <- CDSE::SearchCatalog(aoi = scg,
                                 from = "2020-01-01", to = "2026-05-01",
-                                collection = "sentinel-2-l2a",
+                                collection = "landsat-ot-l1",
                                 with_geometry = FALSE,
                                 client = OAuthClient)
 
@@ -48,9 +48,9 @@ catalogo |> dplyr::glimpse()
 
 ## Evalscript ----
 
-evalscript <- script_file <- system.file("scripts",
-                                         "TrueColorS2L2A.js",
-                                         package = "CDSE")
+evalscript <- system.file("scripts",
+                          "TrueColorS2L2A.js",
+                          package = "CDSE")
 
 evalscript
 
