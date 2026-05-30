@@ -121,8 +121,7 @@ purrr::map2(rasters, nomes, \(raster, nome){
     tidyterra::geom_spatraster_rgb(data = raster) +
     geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
     scale_x_continuous(breaks = seq(-35.48256, -35.471, 0.005)) +
-    labs(title = nome,
-         fill = "NDVI") +
+    labs(title = nome) +
     coord_sf(expand = FALSE) +
     theme_minimal() +
     theme(axis.text = element_text(color = "black", size = 20),
@@ -140,8 +139,7 @@ mapas <- purrr::map2(rasters, nomes, \(raster, nome){
     tidyterra::geom_spatraster_rgb(data = raster) +
     geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
     scale_x_continuous(breaks = seq(-35.48256, -35.471, 0.005)) +
-    labs(title = nome,
-         fill = "NDVI") +
+    labs(title = nome) +
     coord_sf(expand = FALSE) +
     theme_minimal() +
     theme(axis.text = element_text(color = "black", size = 20),
