@@ -86,7 +86,7 @@ purrr::map(periodos, \(periodo){
                  format = "image/tiff",
                  mosaicking_order = "leastCC",
                  resolution = 10,
-                 mask = FALSE,
+                 mask = TRUE,
                  buffer = 100,
                  client = OAuthClient
 
