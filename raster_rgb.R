@@ -26,3 +26,12 @@ scg
 
 ggplot() +
   geom_sf(data = scg, color = "black")
+
+# Baixar raster ----
+
+## Autenticar usuário ----
+
+OAuthClient <- CDSE::GetOAuthClient(id = Sys.getenv("CDSE_ID"),
+                                    secret = Sys.getenv("CDSE_SECRET"))
+
+OAuthClient
