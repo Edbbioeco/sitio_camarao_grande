@@ -65,8 +65,9 @@ periodos <- catalogo |>
                 ano_mes = paste0(ano,
                                  "-",
                                  mes)) |>
+  dplyr::filter(tileCloudCover < 25) |>
   dplyr::group_by(mes, ano) |>
-  dplyr::slice_head() |>
+  dplyr::slice_min(tileCloudCover) |>
   dplyr::arrange(ano, mes) |>
   as.data.frame() |>
   dplyr::pull(acquisitionDate)
