@@ -47,3 +47,13 @@ catalogo <- CDSE::SearchCatalog(aoi = scg,
 catalogo
 
 catalogo |> dplyr::glimpse()
+
+## Evalscript ----
+
+evalscript <- CDSE::MakeEvalScript(list(bands = c("R", "G", "B"),
+                                        formula = "0.3 * R + 0.59 * G + 0.11 * B",
+                                        platforms = "Sentinel-2"),
+                                   constellation = "sentinel-2") |>
+  paste(collapse = "\n")
+
+evalscript
