@@ -73,6 +73,8 @@ periodos
 
 ## Baixar rasters ----
 
+unlink("./rgb", recursive = TRUE)
+
 dir.create("./rgb")
 
 purrr::map(periodos, \(periodo){
@@ -81,7 +83,7 @@ purrr::map(periodos, \(periodo){
                  time_range = periodo,
                  script = evalscript,
                  file = paste0("./rgb/rbg_", periodo, ".tif"),
-                 collection = "sentinel-2-l2a",
+                 collection = "landsat-ot-l1",
                  format = "image/tiff",
                  mosaicking_order = "leastCC",
                  resolution = 10,
