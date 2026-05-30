@@ -49,7 +49,7 @@ catalogo |> dplyr::glimpse()
 ## Evalscript ----
 
 evalscript <- system.file("scripts",
-                          "TrueColorS2L2A.js",
+                          "TrueColor.js",
                           package = "CDSE")
 
 evalscript
