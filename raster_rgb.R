@@ -99,9 +99,11 @@ purrr::map(periodos, \(periodo){
 ## Importar rasters ----
 
 rasters <- purrr::map(list.files(path = "./rgb/",
+                                 pattern = ".tif$",
                                  full.names = TRUE),
                       terra::rast) |>
   setNames(list.files(path = "./rgb/",
+                      pattern = ".tif$",
                       full.names = TRUE) |>
              stringr::str_remove_all("./rgb/|.tif"))
 
