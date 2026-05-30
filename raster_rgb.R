@@ -131,3 +131,31 @@ purrr::map2(rasters, nomes, \(raster, nome){
 
   },
   .progress = TRUE)
+
+## Exportar ----
+
+mapas <- purrr::map2(rasters, nomes, \(raster, nome){
+
+  ggplot() +
+    tidyterra::geom_spatraster_rgb(data = raster) +
+    geom_sf(data = scg, color = "red", fill = "transparent", linewidth = 1) +
+    scale_x_continuous(breaks = seq(-35.48256, -35.471, 0.005)) +
+    labs(title = nome,
+         fill = "NDVI") +
+    coord_sf(expand = FALSE) +
+    theme_minimal() +
+    theme(axis.text = element_text(color = "black", size = 20),
+          plot.title = element_text(color = "black", size = 20))
+
+  },
+  .progress = TRUE)
+
+dir.create("./mapas_rgb")
+
+purrr::map2(mapas,
+            nomes,
+            ~ ggsave(plot = .x,
+                     filename = paste0("./mapas_rgb/mapa_", .y, ".png"),
+                     height = 10,
+                     width = 12),
+            .progress = TRUE)
