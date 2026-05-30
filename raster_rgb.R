@@ -38,7 +38,7 @@ OAuthClient
 
 catalogo <- CDSE::SearchCatalog(aoi = scg,
                                 from = "2020-01-01", to = "2026-05-01",
-                                collection = "landsat-ot-l1",
+                                collection = "sentinel-2-l2a",
                                 with_geometry = FALSE,
                                 client = OAuthClient)
 
@@ -62,7 +62,7 @@ periodos <- catalogo |>
                 ano_mes = paste0(ano,
                                  "-",
                                  mes)) |>
-  dplyr::filter(tileCloudCover < 15) |>
+  dplyr::filter(tileCloudCover < 10) |>
   dplyr::group_by(mes, ano) |>
   dplyr::slice_min(tileCloudCover) |>
   dplyr::arrange(ano, mes) |>
@@ -83,10 +83,10 @@ purrr::map(periodos, \(periodo){
                  time_range = periodo,
                  script = evalscript,
                  file = paste0("./rgb/rbg_", periodo, ".tif"),
-                 collection = "landsat-ot-l1",
+                 collection = "sentinel-2-l2a",
                  format = "image/tiff",
                  mosaicking_order = "leastCC",
-                 resolution = 10,
+                 resolution = 5,
                  mask = TRUE,
                  buffer = 100,
                  client = OAuthClient
