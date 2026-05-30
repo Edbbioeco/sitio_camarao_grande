@@ -86,7 +86,7 @@ purrr::map(periodos, \(periodo){
                  collection = "sentinel-2-l2a",
                  format = "image/tiff",
                  mosaicking_order = "leastCC",
-                 resolution = 5,
+                 resolution = 2.5,
                  mask = TRUE,
                  buffer = 100,
                  client = OAuthClient
