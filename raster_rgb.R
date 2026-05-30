@@ -100,8 +100,8 @@ purrr::map(periodos, \(periodo){
 rasters <- purrr::map(list.files(path = "./rgb/",
                                  full.names = TRUE),
                       terra::rast) |>
-  setNames(list.files(path = "./ndvi/",
+  setNames(list.files(path = "./rgb/",
                       full.names = TRUE) |>
-             stringr::str_remove_all("./ndvi/|.tif"))
+             stringr::str_remove_all("./rgb/|.tif"))
 
 rasters
