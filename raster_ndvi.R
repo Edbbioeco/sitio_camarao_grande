@@ -76,6 +76,8 @@ periodos
 
 ## Baixar rasters ----
 
+unlink("./ndvi", recursive = TRUE)
+
 dir.create("./ndvi")
 
 purrr::map(periodos, \(periodo){
@@ -87,7 +89,7 @@ purrr::map(periodos, \(periodo){
                  collection = "sentinel-2-l2a",
                  format = "image/tiff",
                  mosaicking_order = "leastCC",
-                 resolution = 20,
+                 resolution = 5,
                  mask = FALSE,
                  buffer = 100,
                  client = OAuthClient)
