@@ -92,3 +92,16 @@ purrr::map(periodos, \(periodo){
 
                  )},
   .progress = TRUE)
+
+# Mapas ----
+
+## Importar rasters ----
+
+rasters <- purrr::map(list.files(path = "./rgb/",
+                                 full.names = TRUE),
+                      terra::rast) |>
+  setNames(list.files(path = "./ndvi/",
+                      full.names = TRUE) |>
+             stringr::str_remove_all("./ndvi/|.tif"))
+
+rasters
