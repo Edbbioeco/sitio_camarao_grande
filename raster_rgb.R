@@ -71,3 +71,24 @@ periodos <- catalogo |>
   dplyr::pull(acquisitionDate)
 
 periodos
+
+## Baixar rasters ----
+
+dir.create("./rgb")
+
+purrr::map(periodos, \(periodo){
+
+  CDSE::GetImage(bbox = scg |> sf::st_bbox(),
+                 time_range = periodo,
+                 script = evalscript,
+                 file = paste0("./rgb/rbg_", periodo, ".tif"),
+                 collection = "sentinel-2-l2a",
+                 format = "image/tiff",
+                 mosaicking_order = "leastCC",
+                 resolution = 10,
+                 mask = FALSE,
+                 buffer = 100,
+                 client = OAuthClient
+
+                 )},
+  .progress = TRUE)
