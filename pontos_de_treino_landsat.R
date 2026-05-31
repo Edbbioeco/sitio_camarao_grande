@@ -31,3 +31,8 @@ scg
 ggplot() +
   geom_sf(data = scg)
 
+## Raster ----
+
+### Importar ----
+
+rster_rg <- terra::rast("rgb/rbg_2019-11-24.tif")
