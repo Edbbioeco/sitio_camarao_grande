@@ -36,3 +36,23 @@ purrr::map2(rasters,
 modelo <- readr::read_rds("modelo_randomforest.rds")
 
 modelo
+
+## Gerar múltiplas predições ----
+
+predicoes <- purrr::map(rasters, \(raster){
+
+  purrr::map(1:5, \(rep){
+
+    raster <- raster |> terra::subset(-4)
+
+    names(raster) <- rownames(modelo$importance)
+
+    terra::predict(raster, modelo)
+
+    },
+    .progress = TRUE)
+
+  },
+  .progress = TRUE)
+
+predicoes
