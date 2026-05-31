@@ -20,3 +20,11 @@ rasters <- purrr::map(list.files(path = "./rgb",
   setNames(list.files(path = "./rgb",
                       full.names = TRUE) |>
              stringr::str_remove_all("./rgb/|.tif"))
+
+## Visualizar ----
+
+purrr::map2(rasters,
+            rasters |> names(),
+            ~ ggplot() +
+              tidyterra::geom_spatraster_rgb(data = .x) +
+              labs(title = .y))
