@@ -44,3 +44,24 @@ raster_rg
 ggplot() +
   tidyterra::geom_spatraster_rgb(data = raster_rg) +
   geom_sf(data = scg, color = "red", fill = "transparent")
+
+# Pontos de treino ----
+
+## MApa interativo ----
+
+mapa_inter <- leaflet::leaflet() |>
+  leaflet::addRasterImage(x = raster_rg) |>
+  leaflet.extras::addDrawToolbar(targetGroup = "Draw",
+                                 polylineOptions = TRUE,
+                                 polygonOptions = TRUE,
+                                 circleOptions = TRUE,
+                                 rectangleOptions = TRUE,
+                                 markerOptions = TRUE,
+                                 circleMarkerOptions = TRUE,
+                                 editOptions = leaflet.extras::editToolbarOptions()) |>
+  leafem::addMouseCoordinates() |>
+  leaflet::addPolygons(data = scg,
+                       color = "red",
+                       fillOpacity = 0)
+
+mapa_inter
