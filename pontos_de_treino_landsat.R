@@ -47,7 +47,7 @@ ggplot() +
 
 # Pontos de treino ----
 
-## MApa interativo ----
+## Mapa interativo ----
 
 mapa_inter <- leaflet::leaflet() |>
   leaflet::addRasterImage(x = raster_rg) |>
