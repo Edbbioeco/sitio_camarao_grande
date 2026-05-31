@@ -56,3 +56,11 @@ predicoes <- purrr::map(rasters, \(raster){
   .progress = TRUE)
 
 predicoes
+
+## Calcular o consenso ----
+
+consensos <- purrr::map(predicoes, ~terra::app(x = .x |> terra::rast(),
+                                               DescTools::Mode),
+                        .progress = TRUE)
+
+consensos
