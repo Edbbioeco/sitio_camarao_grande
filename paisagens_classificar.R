@@ -28,3 +28,11 @@ purrr::map2(rasters,
             ~ ggplot() +
               tidyterra::geom_spatraster_rgb(data = .x) +
               labs(title = .y))
+
+# Classificação ----
+
+## Importar o modelo ----
+
+modelo <- readr::read_rds("modelo_randomforest.rds")
+
+modelo
