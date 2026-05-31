@@ -23,3 +23,11 @@ library(mapedit)
 ### Importar ----
 
 scg <- sf::st_read("shapefile_sitio.shp")
+
+### Visualizar ----
+
+scg
+
+ggplot() +
+  geom_sf(data = scg)
+
