@@ -1,8 +1,8 @@
 # Pacotes ----
 
-library(terra)
-
 library(tidyverse)
+
+library(terra)
 
 library(tidyterra)
 
