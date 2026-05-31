@@ -85,13 +85,13 @@ purrr::map(periodos, \(periodo){
                  file = paste0("./rgb/rbg_", periodo, ".tif"),
                  collection = "sentinel-2-l2a",
                  format = "image/tiff",
-                 mosaicking_order = "leastCC",
-                 resolution = 2.5,
+                 mosaicking_order = "leastRecent",
+                 resolution = 10,
                  mask = TRUE,
                  buffer = 100,
-                 client = OAuthClient
+                 client = OAuthClient)
 
-                 )},
+  },
   .progress = TRUE)
 
 # Mapas ----
