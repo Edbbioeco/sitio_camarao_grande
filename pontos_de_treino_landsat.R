@@ -15,3 +15,11 @@ library(leaflet.extras)
 library(leafem)
 
 library(mapedit)
+
+# Dados ----
+
+## Shapefile ----
+
+### Importar ----
+
+scg <- sf::st_read("shapefile_sitio.shp")
