@@ -35,12 +35,12 @@ ggplot() +
 
 ### Importar ----
 
-rster_rg <- terra::rast("rgb/rbg_2019-11-24.tif")
+raster_rg <- terra::rast("rgb/rbg_2019-11-24.tif")
 
 ### Visualizar ----
 
-rster_rg
+raster_rg
 
 ggplot() +
-  tidyterra::geom_spatraster_rgb(data = rster_rg) +
+  tidyterra::geom_spatraster_rgb(data = raster_rg) +
   geom_sf(data = scg, color = "red", fill = "transparent")
