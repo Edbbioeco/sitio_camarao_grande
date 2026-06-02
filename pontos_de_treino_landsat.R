@@ -65,3 +65,14 @@ mapa_inter <- leaflet::leaflet() |>
                        fillOpacity = 0)
 
 mapa_inter
+
+## Pontos ----
+
+### Vegetação nativa ----
+
+veg_nat <- mapedit::editMap(mapa_inter)
+
+veg_nat <- veg_nat$drawn |> dplyr::mutate(classe = "Vegetação Nativa")
+
+veg_nat
+
