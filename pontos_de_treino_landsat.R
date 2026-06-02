@@ -83,3 +83,11 @@ plant <- mapedit::editMap(mapa_inter)
 plant <- plant$drawn |> dplyr::mutate(classe = "Plantação")
 
 plant
+
+### Solo exposto ----
+
+solo <- mapedit::editMap(mapa_inter)
+
+solo <- solo$drawn |> dplyr::mutate(classe = "S0olo exposto")
+
+solo
