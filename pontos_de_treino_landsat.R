@@ -91,3 +91,11 @@ solo <- mapedit::editMap(mapa_inter)
 solo <- solo$drawn |> dplyr::mutate(classe = "S0olo exposto")
 
 solo
+
+## Unir Shapefiles ----
+
+pontos <- dplyr::bind_rows(veg_nat,
+                           plant,
+                           solo)
+
+pontos
