@@ -99,3 +99,7 @@ pontos <- dplyr::bind_rows(veg_nat,
                            solo)
 
 pontos
+
+## Exportar os shapefiles ----
+
+pontos |> sf::st_write("pontos_treino_landsat_2019-11-24.shp")
