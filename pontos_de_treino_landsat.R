@@ -76,3 +76,10 @@ veg_nat <- veg_nat$drawn |> dplyr::mutate(classe = "Vegetação Nativa")
 
 veg_nat
 
+### Plantação ----
+
+plant <- mapedit::editMap(mapa_inter)
+
+plant <- plant$drawn |> dplyr::mutate(classe = "Plantação")
+
+plant
