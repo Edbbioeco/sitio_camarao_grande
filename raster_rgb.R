@@ -37,7 +37,8 @@ OAuthClient
 ## Catálogo ----
 
 catalogo <- CDSE::SearchCatalog(aoi = scg,
-                                from = "2010-01-01", to = "2026-05-01",
+                                from = "2010-01-01",
+                                to = "2026-05-01",
                                 collection = "sentinel-2-l2a",
                                 with_geometry = FALSE,
                                 client = OAuthClient)
@@ -67,7 +68,12 @@ periodos <- catalogo |>
   dplyr::slice_min(tileCloudCover) |>
   dplyr::arrange(ano, mes) |>
   as.data.frame() |>
-  dplyr::pull(acquisitionDate)
+  dplyr::mutate(data_ini = acquisitionDate,
+                data_fin = acquisitionDate + lubridate::days(30),
+                periodo = purrr::map2(data_ini,
+                                      data_fin,
+                                      ~c(.x, .y))) |>
+  dplyr::pull(periodo)
 
 periodos
 
