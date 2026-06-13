@@ -76,3 +76,11 @@ consensos <- purrr::map(predicoes,
                         .progress = TRUE)
 
 consensos
+
+## Visualizar predições ----
+
+purrr::map(consensos,
+           ~ggplot() +
+             tidyterra::geom_spatraster(data = .x) +
+             scale_fill_viridis_c(),
+           .progress = TRUE)
