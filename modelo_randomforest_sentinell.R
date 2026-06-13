@@ -71,9 +71,13 @@ valores |> dplyr::glimpse()
 modelos <- purrr::map(1:500,
                       purrr::in_parallel(
 
-                        ~randomForest::randomForest(classe ~ .,
-                                                    data = valores,
-                                                    ntree = 1500)
+                        ~randomForest::randomForest(
+                          classe ~ .,
+                          data = valores |>
+                            dplyr::filter(classe != "Corpos Hídricos") |>
+                            droplevels(),
+                          ntree = 1500
+                          )
 
                       ),
                       .progress = TRUE) |>
@@ -99,7 +103,7 @@ df_modelos <- purrr::imap(modelos,
 df_modelos
 
 df_modelos |>
-  tidyr::pivot_longer(cols = 1:5,
+  tidyr::pivot_longer(cols = 1:4,
                       names_to = "Error type",
                       values_to = "Error") |>
   dplyr::group_by(`N-Tree`, `Error type`) |>
@@ -120,23 +124,19 @@ df_modelos |>
   scale_color_manual(values = c("OOB" = "black",
                                 "Vegetação Nativa" = "darkgreen",
                                 "Plantação" = "limegreen",
-                                "Solo Exposto" = "goldenrod",
-                                "Corpos Hídricos" = "royalblue"),
+                                "Solo Exposto" = "goldenrod"),
                      breaks = c("OOB",
                                 "Vegetação Nativa",
                                 "Plantação",
-                                "Solo Exposto",
-                                "Corpos Hídricos")) +
+                                "Solo Exposto")) +
   scale_fill_manual(values = c("OOB" = "black",
                                "Vegetação Nativa" = "darkgreen",
                                "Plantação" = "limegreen",
-                               "Solo Exposto" = "goldenrod",
-                               "Corpos Hídricos" = "royalblue"),
+                               "Solo Exposto" = "goldenrod"),
                     breaks = c("OOB",
                                "Vegetação Nativa",
                                "Plantação",
-                               "Solo Exposto",
-                               "Corpos Hídricos")) +
+                               "Solo Exposto")) +
   theme_classic() +
   theme(axis.text = element_text(size = 17.5, color = "black"),
         axis.title = element_text(size = 17.5, color = "black"),
