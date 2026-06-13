@@ -83,16 +83,17 @@ modelos
 
 ## Avaliar os modelos ----
 
-f_valores <- modelos |>
-  purrr::imap(\(modelo, id){
+df_modelos <- purrr::imap(modelos,
+                          purrr::in_parallel(
 
-    modelo$err.rate |>
-      as.data.frame() |>
-      dplyr::mutate(modelo_id = id,
-                    ntree     = 1:nrow(modelo$err.rate))
+                            ~.x$err.rate |>
+                              as.data.frame() |>
+                              dplyr::mutate(modelo_id = .y,
+                                            ntree = 1:nrow(.x$err.rate))
 
-  }) |>
+                          ),
+                          .progress = TRUE) |>
   dplyr::bind_rows() |>
   dplyr::rename("N-Tree" = ntree)
 
-df_valores
+df_modelos
