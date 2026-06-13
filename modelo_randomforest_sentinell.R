@@ -65,3 +65,15 @@ valores <- raster |>
 valores
 
 valores |> dplyr::glimpse()
+
+## Criar multiplos modelos ----
+
+modelos <- purrr::map(1:500,
+                      purrr::in_parallel(
+
+                        ~randomForest::randomForest(classe ~ .,
+                                                    data = valores,
+                                                    ntree = 500)
+
+                      ),
+                      .progress = TRUE)
