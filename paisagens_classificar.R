@@ -35,7 +35,7 @@ purrr::map2(rasters,
 
 ## Importar o modelo ----
 
-modelo <- readr::read_rds("modelo_randomforest.rds")
+modelo <- readr::read_rds("modelo_randomforest_sentinell.rds")
 
 modelo
 
