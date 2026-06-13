@@ -41,21 +41,26 @@ modelo
 
 ## Gerar múltiplas predições ----
 
-predicoes <- purrr::map(rasters, \(raster){
+predicoes <- purrr::map(rasters,
+                        purrr::in_parallel(
 
-  purrr::map(1:5, \(rep){
+                          \(raster){
 
-    raster <- raster |> terra::subset(-4)
+                            purrr::map(1:5, \(rep){
 
-    names(raster) <- rownames(modelo$importance)
+                              raster <- raster |> terra::subset(-4)
 
-    terra::predict(raster, modelo)
+                              names(raster) <- rownames(modelo$importance)
 
-    },
-    .progress = TRUE)
+                              terra::predict(raster, modelo)
 
-  },
-  .progress = TRUE)
+                              },
+                              .progress = TRUE)
+
+                            }
+
+                          ),
+                        .progress = TRUE)
 
 predicoes
 
