@@ -76,4 +76,7 @@ modelos <- purrr::map(1:500,
                                                     ntree = 500)
 
                       ),
-                      .progress = TRUE)
+                      .progress = TRUE) |>
+  setNames(paste0("modelo_", 1:500))
+
+modelos
