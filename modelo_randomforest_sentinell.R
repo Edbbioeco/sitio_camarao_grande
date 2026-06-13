@@ -59,7 +59,7 @@ ggplot() +
 valores <- raster |>
   terra::extract(pontos) |>
   dplyr::select(-1) |>
-  dplyr::mutate(classe = pontos$Classe,
+  dplyr::mutate(classe = pontos$Classe |> as.factor(),
                 .before = red)
 
 valores
