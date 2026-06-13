@@ -73,7 +73,7 @@ modelos <- purrr::map(1:500,
 
                         ~randomForest::randomForest(classe ~ .,
                                                     data = valores,
-                                                    ntree = 500)
+                                                    ntree = 1500)
 
                       ),
                       .progress = TRUE) |>
