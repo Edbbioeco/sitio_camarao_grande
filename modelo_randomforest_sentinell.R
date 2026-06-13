@@ -156,3 +156,12 @@ escolhido_modelo <- df_modelos |>
   dplyr::pull(modelo_id)
 
 escolhido_modelo
+
+## Exportar modelo ----
+
+modelos[[escolhido_modelo]] |>
+  saveRDS("modelo_randomforest_sentinell.rds")
+
+escolhido_modelo <- readRDS("modelo_randomforest_sentinell.rds")
+
+escolhido_modelo
