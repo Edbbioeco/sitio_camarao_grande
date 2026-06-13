@@ -38,3 +38,16 @@ pontos
 ggplot() +
   geom_sf(data = sitio) +
   geom_sf(data = pontos, aes(color = Classe))
+
+## Raster de treino ----
+
+### Importar ----
+
+raster <- terra::rast("./rgb/rbg_2019-11-24-2019-12-24.tif")
+
+### Visualizar ----
+
+raster
+
+ggplot() +
+  tidyterra::geom_spatraster_rgb(data = raster)
