@@ -66,8 +66,13 @@ predicoes
 
 ## Calcular o consenso ----
 
-consensos <- purrr::map(predicoes, ~terra::app(x = .x |> terra::rast(),
-                                               DescTools::Mode),
+consensos <- purrr::map(predicoes,
+                        purrr::in_parallel(
+
+                          ~terra::app(x = .x |> terra::rast(),
+                                               DescTools::Mode)
+
+                          ),
                         .progress = TRUE)
 
 consensos
