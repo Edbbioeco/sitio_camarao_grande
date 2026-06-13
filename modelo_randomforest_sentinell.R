@@ -97,3 +97,49 @@ df_modelos <- purrr::imap(modelos,
   dplyr::rename("N-Tree" = ntree)
 
 df_modelos
+
+df_modelos |>
+  tidyr::pivot_longer(cols = 1:5,
+                      names_to = "Error type",
+                      values_to = "Error") |>
+  dplyr::group_by(`N-Tree`, `Error type`) |>
+  dplyr::summarise(mean  = mean(Error),
+                   lower = min(Error),
+                   upper = max(Error),
+                   .groups = "drop") |>
+  ggplot(aes(x = `N-Tree`,
+             color = `Error type`,
+             fill = `Error type`)) +
+  geom_ribbon(aes(ymin = lower,
+                  ymax = upper,
+                  color = NULL),
+              alpha = 0.3) +
+  geom_line(aes(y = mean)) +
+  labs(Y = "Error rate") +
+  scale_x_continuous(breaks = seq(0, 1500, 100)) +
+  scale_color_manual(values = c("OOB" = "black",
+                                "Vegetação Nativa" = "darkgreen",
+                                "Plantação" = "limegreen",
+                                "Solo Exposto" = "goldenrod",
+                                "Corpos Hídricos" = "royalblue"),
+                     breaks = c("OOB",
+                                "Vegetação Nativa",
+                                "Plantação",
+                                "Solo Exposto",
+                                "Corpos Hídricos")) +
+  scale_fill_manual(values = c("OOB" = "black",
+                               "Vegetação Nativa" = "darkgreen",
+                               "Plantação" = "limegreen",
+                               "Solo Exposto" = "goldenrod",
+                               "Corpos Hídricos" = "royalblue"),
+                    breaks = c("OOB",
+                               "Vegetação Nativa",
+                               "Plantação",
+                               "Solo Exposto",
+                               "Corpos Hídricos")) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 17.5, color = "black"),
+        axis.title = element_text(size = 17.5, color = "black"),
+        legend.text = element_text(size = 17.5, color = "black"),
+        legend.title = element_text(size = 17.5, color = "black"),
+        legend.position = "bottom")
