@@ -24,3 +24,17 @@ sitio
 
 ggplot() +
   geom_sf(data = sitio)
+
+## Pontos de treino ----
+
+### Importar ----
+
+pontos <- sf::st_read("pontos_treino.shp")
+
+### Visualizar ----
+
+pontos
+
+ggplot() +
+  geom_sf(data = sitio) +
+  geom_sf(data = pontos, aes(color = Classe))
