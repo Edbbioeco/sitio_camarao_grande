@@ -83,22 +83,25 @@ unlink("./rgb", recursive = TRUE)
 
 dir.create("./rgb")
 
-purrr::map(periodos, \(periodo){
-
-  CDSE::GetImage(bbox = scg |> sf::st_bbox(),
-                 time_range = periodo,
-                 script = evalscript,
-                 file = paste0("./rgb/rbg_", periodo, ".tif"),
-                 collection = "sentinel-2-l2a",
-                 format = "image/tiff",
-                 mosaicking_order = "leastRecent",
-                 resolution = 10,
-                 mask = TRUE,
-                 buffer = 100,
-                 client = OAuthClient)
-
-  },
-  .progress = TRUE)
+purrr::map(periodos,
+           purrr::in_parallel(
+             ~CDSE::GetImage(bbox = scg |> sf::st_bbox(),
+                             time_range = .x,
+                             script = evalscript,
+                             file = paste0("./rgb/rbg_",
+                                           .x[[1]],
+                                           "-",
+                                           .x[[2]],
+                                           ".tif"),
+                             collection = "sentinel-2-l2a",
+                             format = "image/tiff",
+                             mosaicking_order = "leastRecent",
+                             resolution = 10,
+                             mask = TRUE,
+                             buffer = 100,
+                             client = OAuthClient)
+             ),
+           .progress = TRUE)
 
 # Mapas ----
 
