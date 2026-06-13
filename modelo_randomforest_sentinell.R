@@ -80,3 +80,19 @@ modelos <- purrr::map(1:500,
   setNames(paste0("modelo_", 1:500))
 
 modelos
+
+## Avaliar os modelos ----
+
+f_valores <- modelos |>
+  purrr::imap(\(modelo, id){
+
+    modelo$err.rate |>
+      as.data.frame() |>
+      dplyr::mutate(modelo_id = id,
+                    ntree     = 1:nrow(modelo$err.rate))
+
+  }) |>
+  dplyr::bind_rows() |>
+  dplyr::rename("N-Tree" = ntree)
+
+df_valores
