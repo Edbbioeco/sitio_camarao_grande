@@ -143,3 +143,16 @@ df_modelos |>
         legend.text = element_text(size = 17.5, color = "black"),
         legend.title = element_text(size = 17.5, color = "black"),
         legend.position = "bottom")
+
+## Escolher o melhor modelo ----
+
+escolhido_modelo <- df_modelos |>
+  dplyr::group_by(modelo_id) |>
+  dplyr::slice(1) |>
+  dplyr::arrange(OOB) |>
+  dplyr::select(OOB, modelo_id, `N-Tree`) |>
+  dplyr::ungroup() |>
+  dplyr::slice(1) |>
+  dplyr::pull(modelo_id)
+
+escolhido_modelo
