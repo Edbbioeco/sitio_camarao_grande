@@ -51,3 +51,17 @@ raster
 
 ggplot() +
   tidyterra::geom_spatraster_rgb(data = raster)
+
+# Modelo ----
+
+## Extrair os valores ----
+
+valores <- raster |>
+  terra::extract(pontos) |>
+  dplyr::select(-1) |>
+  dplyr::mutate(classe = pontos$Classe,
+                .before = red)
+
+valores
+
+valores |> dplyr::glimpse()
