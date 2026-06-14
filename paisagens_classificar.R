@@ -74,18 +74,16 @@ modelo
 
 ## Gerar múltiplas predições ----
 
-predicoes <- purrr::map(rasters,
+predicoes <- purrr::map(raster_unido,
                         purrr::in_parallel(
 
-                          \(raster){
+                          \(raster_unido){
 
                             purrr::map(1:5, \(rep){
 
-                              raster <- raster |> terra::subset(-4)
+                              names(raster_unido) <- rownames(modelo$importance)
 
-                              names(raster) <- rownames(modelo$importance)
-
-                              terra::predict(raster, modelo)
+                              terra::predict(raster_unido, modelo)
 
                               },
                               .progress = TRUE)
