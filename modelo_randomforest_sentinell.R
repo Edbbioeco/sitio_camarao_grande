@@ -66,6 +66,10 @@ ggplot() +
   tidyterra::geom_spatraster(data = ndvi) +
   scale_fill_viridis_c()
 
+# Unir os rasters ----
+
+raster_unido <- c(rgb, ndvi)
+
 # Modelo ----
 
 ## Extrair os valores ----
