@@ -80,21 +80,23 @@ unlink("./ndvi", recursive = TRUE)
 
 dir.create("./ndvi")
 
-purrr::map(periodos, \(periodo){
+purrr::map(periodos,
+           purrr::in_parallel(
 
-  CDSE::GetImage(bbox = scg |> sf::st_bbox(),
-                 time_range = periodo,
-                 script = evalscript,
-                 file = paste0("./ndvi/ndvi_", periodo, ".tif"),
-                 collection = "sentinel-2-l2a",
-                 format = "image/tiff",
-                 mosaicking_order = "leastCC",
-                 resolution = 5,
-                 mask = FALSE,
-                 buffer = 100,
-                 client = OAuthClient)
-  },
-  .progress = TRUE)
+             ~CDSE::GetImage(bbox = scg |> sf::st_bbox(),
+                             time_range = .x,
+                             script = evalscript,
+                             file = paste0("./ndvi/ndvi_", periodo, ".tif"),
+                             collection = "sentinel-2-l2a",
+                             format = "image/tiff",
+                             mosaicking_order = "leastCC",
+                             resolution = 5,
+                             mask = FALSE,
+                             buffer = 100,
+                             client = OAuthClient)
+
+             ),
+           .progress = TRUE)
 
 # Mapas ----
 
