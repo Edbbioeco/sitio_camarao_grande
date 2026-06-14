@@ -74,7 +74,7 @@ raster_unido <- c(rgb, ndvi)
 
 ## Extrair os valores ----
 
-valores <- raster |>
+valores <- raster_unido |>
   terra::extract(pontos) |>
   dplyr::select(-1) |>
   dplyr::mutate(classe = pontos$Classe |> as.factor(),
