@@ -84,6 +84,16 @@ valores
 
 valores |> dplyr::glimpse()
 
+## Análise exploratória gráfica ----
+
+valores |>
+  tidyr::pivot_longer(cols = 2:5,
+                      values_to = "Valor",
+                      names_to = "índice") |>
+  ggplot(aes(classe, Valor)) +
+  ggbeeswarm::geom_quasirandom() +
+  facet_wrap(~índice, scales = "free_y")
+
 ## Criar multiplos modelos ----
 
 modelos <- purrr::map(1:500,
