@@ -27,13 +27,12 @@ rgb <- purrr::map(list.files(path = "./rgb",
 
 ### Visualizar ----
 
-purrr::map2(rgb,
-            rgb |> names(),
+rgb
+
+purrr::imap(rgb,
             ~ ggplot() +
               tidyterra::geom_spatraster_rgb(data = .x) +
               labs(title = .y))
-
-## NDVI ----
 
 # Classificação ----
 
