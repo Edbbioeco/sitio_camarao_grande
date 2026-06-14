@@ -43,14 +43,14 @@ ggplot() +
 
 ### Importar ----
 
-raster <- terra::rast("./rgb/rbg_2019-11-24-2019-12-24.tif")
+rgb <- terra::rast("./rgb/rbg_2019-11-24-2019-12-24.tif")
 
 ### Visualizar ----
 
-raster
+rgb
 
 ggplot() +
-  tidyterra::geom_spatraster_rgb(data = raster)
+  tidyterra::geom_spatraster_rgb(data = rgb)
 
 ## Raster de NDVI ----
 
