@@ -58,6 +58,14 @@ purrr::imap(ndvi,
 
 # Classificação ----
 
+## Unir os rasters ----
+
+raster_unido <- purrr::map2(rgb,
+                            ndvi,
+                            ~c(.x, .y))
+
+raster_unido
+
 ## Importar o modelo ----
 
 modelo <- readr::read_rds("modelo_randomforest_sentinell.rds")
