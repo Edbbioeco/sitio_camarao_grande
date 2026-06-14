@@ -12,9 +12,11 @@ library(ggview)
 
 # Rasters ----
 
-## Importar ----
+## RGB ----
 
-rasters <- purrr::map(list.files(path = "./rgb",
+### Importar ----
+
+rgb <- purrr::map(list.files(path = "./rgb",
                                  pattern = ".tif$",
                                  full.names = TRUE),
                       terra::rast) |>
@@ -23,13 +25,15 @@ rasters <- purrr::map(list.files(path = "./rgb",
                       full.names = TRUE) |>
              stringr::str_remove_all("./rgb/|.tif"))
 
-## Visualizar ----
+### Visualizar ----
 
-purrr::map2(rasters,
-            rasters |> names(),
+purrr::map2(rgb,
+            rgb |> names(),
             ~ ggplot() +
               tidyterra::geom_spatraster_rgb(data = .x) +
               labs(title = .y))
+
+## NDVI ----
 
 # Classificação ----
 
