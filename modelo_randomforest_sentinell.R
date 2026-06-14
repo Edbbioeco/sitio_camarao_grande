@@ -52,6 +52,20 @@ raster
 ggplot() +
   tidyterra::geom_spatraster_rgb(data = raster)
 
+## Raster de NDVI ----
+
+### Importar ----
+
+ndvi <- terra::rast("./ndvi/ndvi_2019-11-24.tif")
+
+### Visualizar ----
+
+ndvi
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ndvi) +
+  scale_fill_viridis_c()
+
 # Modelo ----
 
 ## Extrair os valores ----
