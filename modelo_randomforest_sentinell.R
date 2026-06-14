@@ -39,7 +39,7 @@ ggplot() +
   geom_sf(data = sitio) +
   geom_sf(data = pontos, aes(color = Classe))
 
-## Raster de treino ----
+## Raster de RGB ----
 
 ### Importar ----
 
