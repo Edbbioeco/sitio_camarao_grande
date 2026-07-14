@@ -115,7 +115,13 @@ div_paisagem_simpson
 ## Unir od data frames ----
 
 df_div_paisagem <- dplyr::bind_rows(div_paisagem_shannon,
-                                    div_paisagem_simpson)
+                                    div_paisagem_simpson) |>
+  dplyr::mutate(metric = dplyr::case_when(
+
+    metric == "shdi" ~ "Shannon-Wiener",
+    .default = "Simpson"
+
+  ))
 
 df_div_paisagem
 
