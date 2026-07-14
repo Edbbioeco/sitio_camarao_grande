@@ -12,15 +12,13 @@ library(ggspatial)
 
 library(ggview)
 
-# Dados ----
+# Shapefile do sítio ----
 
-## Shapefile do sítio ----
-
-### Importar ----
+## Importar ----
 
 sitio <- sf::st_read("shapefile_sitio.shp")
 
-### Visualizar ----
+## Visualizar ----
 
 sitio
 
