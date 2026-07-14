@@ -67,7 +67,8 @@ raster_uso <- purrr::map(
 
       }
 
-    ), .progress = TRUE)
+    ), .progress = TRUE) |>
+  setNames(1985:2025 |> as.character())
 
 
 ### Remover os NULL da lista ----
