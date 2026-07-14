@@ -71,7 +71,7 @@ raster_uso <- purrr::map(
   setNames(1985:2025 |> as.character())
 
 
-### Remover os NULL da lista ----
+## Remover os NULL da lista ----
 
 raster_uso_trat <- raster_uso |>
   purrr::compact()
