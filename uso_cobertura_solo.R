@@ -103,3 +103,10 @@ div_paisagem_shannon
 div_paisagem_simpson <- raster_uso_trat |> landscapemetrics::lsm_l_sidi()
 
 div_paisagem_simpson
+
+## Unir od data frames ----
+
+df_div_paisagem <- dplyr::bind_rows(div_paisagem_shannon,
+                                    div_paisagem_shannon)
+
+df_div_paisagem
