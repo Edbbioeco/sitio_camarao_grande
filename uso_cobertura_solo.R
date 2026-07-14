@@ -8,7 +8,7 @@ library(terra)
 
 library(tidyterra)
 
-library(ggspatial)
+library(landscapemetrics)
 
 library(ggview)
 
