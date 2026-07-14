@@ -119,3 +119,23 @@ df_div_paisagem <- dplyr::bind_rows(div_paisagem_shannon,
 
 df_div_paisagem
 
+## Visualizar ----
+
+df_div_paisagem |>
+  ggplot(aes(Ano, value, color = metric)) +
+  geom_line(linewidth = 1) +
+  facet_wrap(~metric, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = c("gold4", "royalblue4")) +
+  labs(y = "Diversidade da paisagem",
+       color = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        axis.title = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
+        legend.position = "none",
+        strip.text = element_text(size = 30, color = "black"),
+        strip.background = element_rect(color = "black", linewidth = 1),
+        panel.background = element_rect(linewidth = 1, color = "black")) +
+  ggview::canvas(height = 10, width = 12)
+
