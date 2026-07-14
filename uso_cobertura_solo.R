@@ -91,3 +91,15 @@ purrr::imap(raster_uso_trat,
 
            ),
            .progress = TRUE)
+
+# Diversidade da paisagem ----
+
+## Calcular diversidade ----
+
+div_paisagem_shannon <- raster_uso_trat |> landscapemetrics::lsm_l_shdi()
+
+div_paisagem_shannon
+
+div_paisagem_simpson <- raster_uso_trat |> landscapemetrics::lsm_l_sidi()
+
+div_paisagem_simpson
