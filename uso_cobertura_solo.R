@@ -69,3 +69,10 @@ raster_uso <- purrr::map(
 
     ), .progress = TRUE)
 
+
+### Remover os NULL da lista ----
+
+raster_uso_trat <- raster_uso |>
+  purrr::compact()
+
+raster_uso_trat
