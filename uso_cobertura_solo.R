@@ -100,8 +100,7 @@ div_paisagem_shannon <- raster_uso_trat |>
   landscapemetrics::lsm_l_shdi() |>
   dplyr::mutate(Ano = raster_uso_trat |>
                   names() |>
-                  as.numeric() |>
-                  lubridate::as_date())
+                  as.numeric())
 
 div_paisagem_shannon
 
@@ -109,8 +108,7 @@ div_paisagem_simpson <- raster_uso_trat |>
   landscapemetrics::lsm_l_sidi() |>
   dplyr::mutate(Ano = raster_uso_trat |>
                   names() |>
-                  as.numeric() |>
-                  lubridate::as_date())
+                  as.numeric())
 
 div_paisagem_simpson
 
