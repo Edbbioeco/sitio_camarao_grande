@@ -11,3 +11,18 @@ library(tidyterra)
 library(ggspatial)
 
 library(ggview)
+
+# Dados ----
+
+## Shapefile do sítio ----
+
+### Importar ----
+
+sitio <- sf::st_read("shapefile_sitio.shp")
+
+### Visualizar ----
+
+sitio
+
+ggplot() +
+  geom_sf(data = sitio, color = "black")
