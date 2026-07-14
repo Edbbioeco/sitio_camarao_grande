@@ -32,25 +32,40 @@ ggplot() +
 raster_uso <- purrr::map(
   1985:2025,
   purrr::in_parallel(
+    \(periodo) {
 
-    tryCatch(
-      \(periodo){
+      tryCatch({
+
+        arq <- "mapbiomas_local.tif"
 
         download.file(
-         paste0("https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_10/lulc/coverage/brazil_coverage_",
-                periodo,
-                ".tif"),
-         "mapbiomas_local.tif",
-         mode = "wb")
+          paste0(
+            "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_10/lulc/coverage/brazil_coverage_",
+            periodo,
+            ".tif"
+          ),
+          arq,
+          mode = "wb"
+        )
 
-        terra::rast("mapbiomas_local.tif") |>
+        r <- terra::rast(arq) |>
           terra::crop(sitio) |>
           terra::mask(sitio)
 
-        file.remove("mapbiomas_local.tif")
+        file.remove(arq)
 
-    },
-    error = \(e){})
+        r
 
-    ),
-  .progress = TRUE)
+      }, error = \(e) {
+
+        message("Erro no ano ", periodo, ": ", e$message)
+        NULL
+
+        }
+
+      )
+
+      }
+
+    ), .progress = TRUE)
+
