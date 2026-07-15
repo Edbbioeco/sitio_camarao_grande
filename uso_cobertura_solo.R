@@ -244,3 +244,17 @@ raster_uso_trat_mata <- purrr::map(raster_uso_trat,
                                    .progress = TRUE)
 
 raster_uso_trat_mata
+
+## Visualizar rasters filtrados ----
+
+purrr::imap(raster_uso_trat_mata,
+            purrr::in_parallel(
+
+              ~ggplot() +
+                tidyterra::geom_spatraster(data = .x) +
+                scale_fill_viridis_c(option = "turbo",
+                                     na.value = "transparent") +
+                labs(title = .y)
+
+            ),
+            .progress = TRUE)
