@@ -336,3 +336,20 @@ imagens_mata
 gif_mata <- imagens_mata |> magick::image_animate(fps = 1)
 
 gif_mata
+
+## Área da mata ----
+
+### Calcular área ----
+
+areas_mata <- purrr::map_dbl(raster_uso_trat_mata,
+                             purrr::in_parallel(
+
+        ~.x |>
+          terra::expanse(unit = "m") |>
+          as.numeric() %>%
+          .[2]
+
+        ),
+        .progress = TRUE)
+
+areas_mata
