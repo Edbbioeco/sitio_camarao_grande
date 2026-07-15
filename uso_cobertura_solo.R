@@ -160,6 +160,10 @@ gif_uso <- imagens_uso |> magick::image_animate(fps = 1)
 
 gif_uso
 
+### Exportar gif ----
+
+gif_uso |> magick::image_write("gif_uso_cobertura_solo.gif")
+
 # Diversidade da paisagem ----
 
 ## Calcular diversidade ----
