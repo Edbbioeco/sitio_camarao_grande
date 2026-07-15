@@ -8,6 +8,8 @@ library(terra)
 
 library(tidyterra)
 
+library(magick)
+
 library(landscapemetrics)
 
 library(ggview)
