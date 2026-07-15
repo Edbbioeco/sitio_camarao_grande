@@ -408,4 +408,10 @@ serie_temporal_mata <- df_area |>
         panel.background = element_rect(linewidth = 1, color = "black")) +
   gganimate::transition_reveal(Ano)
 
-serie_temporal_mata |> gganimate::animate(fps = 20, width = 900, height = 700)
+serie_temporal_mata_anim <- serie_temporal_mata |>
+  gganimate::animate(fps = 20, width = 1200, height = 1000)
+
+serie_temporal_mata_anim
+
+gganimate::anim_save("./mapas_area_mata/serie_temporal.gif",
+                     animation = serie_temporal_mata_anim)
