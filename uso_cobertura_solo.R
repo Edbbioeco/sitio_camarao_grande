@@ -14,6 +14,8 @@ library(landscapemetrics)
 
 library(ggview)
 
+library(gganimate)
+
 # Shapefile do sítio ----
 
 ## Importar ----
