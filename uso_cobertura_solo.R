@@ -359,7 +359,7 @@ areas_mata
 df_area <- tibble::tibble(Ano = raster_uso_trat_mata |>
                             names() |>
                             as.numeric(),
-                          `shannon-Wiener` = div_paisagem_shannon$value,
+                          `Diversidade da paisagem (shannon-Wiener)` = div_paisagem_shannon$value,
                           `Área de mata (m²)` = areas_mata) |>
   tidyr::pivot_longer(cols = 2:3,
                       names_to = "metrica",
