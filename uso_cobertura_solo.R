@@ -353,3 +353,16 @@ areas_mata <- purrr::map_dbl(raster_uso_trat_mata,
         .progress = TRUE)
 
 areas_mata
+
+### Criar o data frame dos valores ----
+
+df_area <- tibble::tibble(Ano = raster_uso_trat_mata |>
+                            names() |>
+                            as.numeric(),
+                          `shannon-Wiener` = div_paisagem_shannon$value,
+                          `Área de mata (m²)` = areas_mata) |>
+  tidyr::pivot_longer(cols = 2:3,
+                      names_to = "metrica",
+                      values_to = "Valores")
+
+df_area
