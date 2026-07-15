@@ -143,6 +143,17 @@ purrr::imap(mapas_uso,
              ),
             .progress = TRUE)
 
+## Criar gif ----
+
+## Importar as imagens ----
+
+imagens_uso <- list.files(path = "./mapas_uso_cobertura_solo/",
+                          pattern = "^mapa_",
+                          full.names = TRUE) |>
+  magick::image_read()
+
+imagens_uso
+
 # Diversidade da paisagem ----
 
 ## Calcular diversidade ----
