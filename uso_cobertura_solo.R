@@ -229,3 +229,18 @@ ggsave(filename = "./mapas_uso_cobertura_solo/serie_temporal.png",
 codigos <- c(1:6, 10:12, 29, 32, 49:50)
 
 codigos
+
+## Filtrar para as áreas de mata ----
+
+raster_uso_trat_mata <- purrr::map(raster_uso_trat,
+                                   purrr::in_parallel(
+
+                                     ~.x |>
+                                       tidyterra::filter(
+
+                                         mapbiomas_local %in% codigos)
+
+                                     ),
+                                   .progress = TRUE)
+
+raster_uso_trat_mata
