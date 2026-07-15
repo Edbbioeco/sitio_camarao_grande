@@ -235,13 +235,23 @@ codigos
 raster_uso_trat_mata <- purrr::map(raster_uso_trat,
                                    purrr::in_parallel(
 
-                                     ~.x |>
-                                       tidyterra::filter(
+          ~.x |>
+            tidyterra::mutate(
 
-                                         mapbiomas_local %in% codigos)
+              mapbiomas_local = dplyr::case_when(
 
-                                     ),
-                                   .progress = TRUE)
+                mapbiomas_local %in% codigos ~ "Mata",
+                .default = mapbiomas_local |> as.character()
+
+              )
+
+            ) |>
+            tidyterra::filter(
+
+              mapbiomas_local == "Mata")
+
+          ),
+          .progress = TRUE)
 
 raster_uso_trat_mata
 
