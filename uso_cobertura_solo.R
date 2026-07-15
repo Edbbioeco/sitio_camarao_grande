@@ -330,3 +330,9 @@ imagens_mata <- list.files(path = "./mapas_area_mata/",
   magick::image_read()
 
 imagens_mata
+
+### Gerar o gif ----
+
+gif_mata <- imagens_mata |> magick::image_animate(fps = 1)
+
+gif_mata
