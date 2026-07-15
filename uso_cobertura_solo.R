@@ -194,8 +194,8 @@ df_div_paisagem <- dplyr::bind_rows(div_paisagem_shannon,
                                     div_paisagem_simpson) |>
   dplyr::mutate(metric = dplyr::case_when(
 
-    metric == "shdi" ~ "Shannon-Wiener",
-    .default = "Gini-Simpson"
+    metric == "shdi" ~ "Diversidade da paisagem (Shannon-Wiener)",
+    .default = "Diversidade da paisagem (Gini-Simpson)"
 
   ))
 
