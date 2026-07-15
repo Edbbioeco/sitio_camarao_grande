@@ -222,3 +222,10 @@ df_div_paisagem |>
 ggsave(filename = "./mapas_uso_cobertura_solo/serie_temporal.png",
        height = 10, width = 12)
 
+# Área de mata ----
+
+## Códigos para área de mata ----
+
+codigos <- c(1:6, 10:12, 29, 32, 49:50)
+
+codigos
