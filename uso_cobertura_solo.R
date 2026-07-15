@@ -268,3 +268,42 @@ purrr::imap(raster_uso_trat_mata,
 
             ),
             .progress = TRUE)
+
+## Exportar os mapss ----
+
+mapas_uso_mata <- purrr::imap(raster_uso_trat_mata,
+                              purrr::in_parallel(
+
+          ~ggplot() +
+            geom_sf(data = sitio, color = "black", fill = "transparent",
+                    linewidth = 1) +
+            tidyterra::geom_spatraster(data = .x) +
+            scale_fill_manual(values = c("Mata" = "forestgreen"),
+                              na.translate = FALSE,
+                              guide = guide_colourbar(
+
+                                title.position = "top",
+                                title.hjust = 0.5
+
+                                )
+                              ) +
+            labs(title = paste0("Área de mata do sítio Camarão Grande para ", .y),
+                 subtitle = "Fonte: MapBiomas",
+                 fill = "Área de mata") +
+            theme_bw() +
+            theme(axis.text = element_text(size = 20, color = "black"),
+                  legend.text = element_text(size = 20, color = "black"),
+                  legend.title = element_text(size = 20, color = "black"),
+                  legend.position = "bottom",
+                  strip.text = element_text(size = 30, color = "black"),
+                  strip.background = element_rect(color = "black", linewidth = 1),
+                  panel.background = element_rect(linewidth = 1, color = "black"),
+                  plot.title = element_text(size = 20, color = "black",
+                                            hjust = 0.5),
+                  plot.subtitle = element_text(size = 17.5, color = "black",
+                                               hjust = 0.5))
+
+          ),
+          .progress = TRUE)
+
+mapas_uso_mata
