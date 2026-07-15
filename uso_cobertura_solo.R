@@ -415,3 +415,7 @@ serie_temporal_mata_anim
 
 gganimate::anim_save("./mapas_area_mata/serie_temporal.gif",
                      animation = serie_temporal_mata_anim)
+
+gganimate::anim_save("./mapas_area_mata/serie_temporal.mp4",
+                     animation = serie_temporal_mata_anim,
+                     encoder = "mpeg4")
