@@ -307,3 +307,15 @@ mapas_uso_mata <- purrr::imap(raster_uso_trat_mata,
           .progress = TRUE)
 
 mapas_uso_mata
+
+purrr::imap(mapas_uso_mata,
+            purrr::in_parallel(
+
+              ~ggsave(.x,
+                      filename = paste0("./mapas_area_mata/mapa_",
+                                        .y,
+                                        ".png"),
+                      height = 10, width = 12)
+
+            ),
+            .progress = TRUE)
