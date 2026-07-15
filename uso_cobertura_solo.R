@@ -262,8 +262,8 @@ purrr::imap(raster_uso_trat_mata,
 
               ~ggplot() +
                 tidyterra::geom_spatraster(data = .x) +
-                scale_fill_viridis_c(option = "turbo",
-                                     na.value = "transparent") +
+                scale_fill_manual(values = c("Mata" = "forestgreen"),
+                                  na.translate = FALSE) +
                 labs(title = .y)
 
             ),
