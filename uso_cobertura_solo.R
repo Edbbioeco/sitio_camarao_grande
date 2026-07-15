@@ -280,7 +280,7 @@ mapas_uso_mata <- purrr::imap(raster_uso_trat_mata,
             tidyterra::geom_spatraster(data = .x) +
             scale_fill_manual(values = c("Mata" = "forestgreen"),
                               na.translate = FALSE,
-                              guide = guide_colourbar(
+                              guide = guide_legend(
 
                                 title.position = "top",
                                 title.hjust = 0.5
