@@ -160,7 +160,7 @@ imagens_uso
 
 ### Gerar o gif ----
 
-gif_uso <- imagens_uso |> magick::image_animate(fps = 1)
+gif_uso <- imagens_uso |> magick::image_animate(fps = 2)
 
 gif_uso
 
@@ -223,6 +223,8 @@ df_div_paisagem |>
 
 ggsave(filename = "./mapas_uso_cobertura_solo/serie_temporal.png",
        height = 10, width = 12)
+
+### Criar o mapa ----
 
 # Área de mata ----
 
