@@ -366,3 +366,46 @@ df_area <- tibble::tibble(Ano = raster_uso_trat_mata |>
                       values_to = "Valores")
 
 df_area
+
+### Gráfico ----
+
+df_area |>
+  ggplot(aes(Ano, Valores, color = metrica)) +
+  geom_line(linewidth = 1) +
+  facet_wrap(~metrica, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = c("green4", "gold4")) +
+  labs(color = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        axis.title = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
+        legend.position = "none",
+        strip.text = element_text(size = 30, color = "black"),
+        strip.background = element_rect(color = "black", linewidth = 1),
+        panel.background = element_rect(linewidth = 1, color = "black")) +
+  ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "./mapas_area_mata/serie_temporal.png",
+       height = 10, width = 12)
+
+### Gráfico animado ----
+
+serie_temporal_mata <- df_area |>
+  ggplot(aes(Ano, Valores, color = metrica)) +
+  geom_line(linewidth = 1) +
+  facet_wrap(~metrica, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = c("green4", "gold4")) +
+  labs(color = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        axis.title = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
+        legend.position = "none",
+        strip.text = element_text(size = 30, color = "black"),
+        strip.background = element_rect(color = "black", linewidth = 1),
+        panel.background = element_rect(linewidth = 1, color = "black")) +
+  gganimate::transition_reveal(Ano)
+
+serie_temporal_mata |> gganimate::animate(fps = 20, width = 900, height = 700)
