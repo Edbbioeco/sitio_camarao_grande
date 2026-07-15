@@ -114,7 +114,7 @@ mapas_uso <- purrr::imap(raster_uso_trat,
                                       ticks.colour = "black")
 
                                     ) +
-               labs(title = paste0("Uso e cobertura do siolo para ", .y),
+               labs(title = paste0("Uso e cobertura do solo para ", .y),
                     subtitle = "Fonte: MapBiomas",
                     fill = "Classe de uso e cobertura do solo") +
                theme_bw() +
