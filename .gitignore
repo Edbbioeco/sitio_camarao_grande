@@ -12,3 +12,8 @@
 *.Rproj
 *.png
 *.rds
+*.gpkg
+*.tif
+*.json
+*.txt
+.posit/assistant
