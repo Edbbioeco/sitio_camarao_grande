@@ -47,3 +47,12 @@ mapa
 
 poligonos <- mapa |> mapedit::editMap()
 
+### Visualizar os shapefiles ----
+
+matas <- poligonos$finished
+
+matas
+
+ggplot() +
+  geom_sf(data = matas, color = "forestgreen", fill = "forestgreen") +
+  geom_sf(data = scg, color = "black", fill = "transparent")
