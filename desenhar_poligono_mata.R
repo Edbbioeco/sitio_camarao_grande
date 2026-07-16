@@ -56,3 +56,7 @@ matas
 ggplot() +
   geom_sf(data = matas, color = "forestgreen", fill = "forestgreen") +
   geom_sf(data = scg, color = "black", fill = "transparent")
+
+## Exportar o shapefile ----
+
+matas |> sf::st_write("matas_sitio_camarao_grande.gpkg")
