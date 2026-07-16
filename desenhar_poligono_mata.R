@@ -42,3 +42,8 @@ mapa <- leaflet::leaflet(options = leaflet::leafletOptions(maxZoom = 22)) |>
                        fill = FALSE)
 
 mapa
+
+## Desenhar os polígonos ----
+
+poligonos <- mapa |> mapedit::editMap()
+
