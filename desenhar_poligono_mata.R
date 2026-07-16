@@ -30,7 +30,8 @@ ggplot() +
 ## Criar mapa interativo ----
 
 mapa <- leaflet::leaflet(options = leaflet::leafletOptions(maxZoom = 22)) |>
-  leaflet::addProviderTiles(provider = providers$Esri.WorldImagery) |>
+  leaflet::addTiles(urlTemplate = "http://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                    options = leafletOptions(maxZoom = 22)) |>
   leaflet.extras::addDrawToolbar(
     targetGroup = "Draw",
     editOptions = leaflet.extras::editToolbarOptions()
