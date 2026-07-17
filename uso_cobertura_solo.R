@@ -40,25 +40,13 @@ raster_uso <- purrr::map(
 
       tryCatch({
 
-        arq <- "mapbiomas_local.tif"
-
-        download.file(
-          paste0(
-            "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_10/lulc/coverage/brazil_coverage_",
-            periodo,
-            ".tif"
-          ),
-          arq,
-          mode = "wb"
-        )
-
-        r <- terra::rast(arq) |>
+        terra::rast(paste0(
+          "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_10/lulc/coverage/brazil_coverage_",
+          periodo,
+          ".tif"
+        )) |>
           terra::crop(sitio) |>
           terra::mask(sitio)
-
-        file.remove(arq)
-
-        r
 
       }, error = \(e) {
 
@@ -73,7 +61,6 @@ raster_uso <- purrr::map(
 
     ), .progress = TRUE) |>
   setNames(1985:2025 |> as.character())
-
 
 ## Remover os NULL da lista ----
 
