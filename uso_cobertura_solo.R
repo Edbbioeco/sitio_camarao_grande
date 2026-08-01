@@ -65,7 +65,13 @@ raster_uso <- purrr::map(
 ## Remover os NULL da lista ----
 
 raster_uso_trat <- raster_uso |>
-  purrr::compact()
+  purrr::compact() |>
+  purrr::map(purrr::in_parallel(
+
+    ~.x |> terra::as.factor()
+
+    ),
+    .progress = TRUE)
 
 raster_uso_trat
 
