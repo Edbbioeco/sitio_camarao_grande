@@ -354,7 +354,9 @@ gif_mata
 
 ### Exportar gif ----
 
-gif_mata |> magick::image_write("./mapas_area_mata/gif_area_mata.gif")
+gif_mata |>
+  magick::image_scale("1280x1066!") |>
+  magick::image_write("./mapas_area_mata/gif_area_mata.gif")
 
 ## Área da mata ----
 
