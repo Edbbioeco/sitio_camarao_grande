@@ -278,6 +278,7 @@ purrr::imap(raster_uso_trat_mata,
                 tidyterra::geom_spatraster(data = .x) +
                 scale_fill_manual(values = c("Mata" = "forestgreen"),
                                   na.translate = FALSE) +
+                geom_sf(data = sitio, color = "black", fill = "transparent") +
                 labs(title = .y)
 
             ),
