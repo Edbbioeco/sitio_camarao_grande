@@ -84,8 +84,8 @@ purrr::imap(raster_uso_trat,
 
               ~ggplot() +
                 tidyterra::geom_spatraster(data = .x) +
-                scale_fill_viridis_c(option = "turbo",
-                                     na.value = "transparent") +
+                scale_fill_viridis_d(option = "turbo",
+                                     na.translate = FALSE) +
                 labs(title = .y)
 
            ),
