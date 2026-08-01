@@ -246,32 +246,26 @@ ggsave(filename = "./mapas_uso_cobertura_solo/serie_temporal.png",
 
 ## Códigos para área de mata ----
 
-codigos <- c(1:6, 10:12, 29, 32, 49:50)
+codigos <- c(1:6, 10:12, 29, 32, 49:50) |> as.character()
 
 codigos
 
 ## Filtrar para as áreas de mata ----
 
-raster_uso_trat_mata <- purrr::map(raster_uso_trat,
-                                   purrr::in_parallel(
+raster_uso_trat_mata <- purrr::imap(
+  raster_uso_trat,
+  ~.x |>
+    tidyterra::mutate(
+      !!{{paste0("brazil_coverage_", .y)}} := dplyr::case_when(
 
-          ~.x |>
-            tidyterra::mutate(
+        .data[[paste0("brazil_coverage_", .y)]] %in%
+          (codigos |> as.numeric()) ~ "Mata",
+        .default = .data[[paste0("brazil_coverage_", .y)]] |> as.character()
 
-              mapbiomas_local = dplyr::case_when(
-
-                mapbiomas_local %in% codigos ~ "Mata",
-                .default = mapbiomas_local |> as.character()
-
-              )
-
-            ) |>
-            tidyterra::filter(
-
-              mapbiomas_local == "Mata")
-
-          ),
-          .progress = TRUE)
+        )
+      ) |>
+    tidyterra::filter(.data[[paste0("brazil_coverage_", .y)]] == "Mata"),
+  .progress = TRUE)
 
 raster_uso_trat_mata
 
