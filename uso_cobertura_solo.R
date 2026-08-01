@@ -176,6 +176,14 @@ gif_uso |>
   magick::image_scale("1280x1066!") |>
   magick::image_write("./mapas_uso_cobertura_solo/gif_uso_cobertura_solo.gif")
 
+## Exportar como vídeo ----
+
+gif_uso |>
+  magick::image_scale("1280x1066!") |>
+  magick::image_write_video(
+    path = "./mapas_uso_cobertura_solo/gif_uso_cobertura_solo.mp4",
+    framerate = 1)
+
 # Diversidade da paisagem ----
 
 ## Calcular diversidade ----
