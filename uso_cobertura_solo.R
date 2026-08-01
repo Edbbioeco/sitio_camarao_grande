@@ -360,7 +360,7 @@ gif_mata |>
 
 ## Exportar como vídeo ----
 
-gif_uso |>
+gif_mata |>
   magick::image_scale("1280x1066!") |>
   magick::image_write_video(
     path = "./mapas_area_mata/gif_area_mata.mp4",
