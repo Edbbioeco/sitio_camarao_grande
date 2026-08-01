@@ -172,7 +172,9 @@ gif_uso
 
 ### Exportar gif ----
 
-gif_uso |> magick::image_write("./mapas_uso_cobertura_solo/gif_uso_cobertura_solo.gif")
+gif_uso |>
+  magick::image_scale("1280x1066!") |>
+  magick::image_write("./mapas_uso_cobertura_solo/gif_uso_cobertura_solo.gif")
 
 # Diversidade da paisagem ----
 
