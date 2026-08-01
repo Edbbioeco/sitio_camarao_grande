@@ -438,7 +438,7 @@ serie_temporal_mata <- df_area |>
   gganimate::transition_reveal(Ano)
 
 serie_temporal_mata_anim <- serie_temporal_mata |>
-  gganimate::animate(fps = 20, width = 1200, height = 1000)
+  gganimate::animate(fps = 20, width = 1280, height = 1066)
 
 serie_temporal_mata_anim
 
