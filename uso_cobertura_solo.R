@@ -166,7 +166,7 @@ imagens_uso
 
 ### Gerar o gif ----
 
-gif_uso <- imagens_uso |> magick::image_animate(fps = 2)
+gif_uso <- imagens_uso |> magick::image_animate(fps = 1)
 
 gif_uso
 
