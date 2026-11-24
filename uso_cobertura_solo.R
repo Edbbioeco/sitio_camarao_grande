@@ -41,7 +41,7 @@ raster_uso <- purrr::map(
       tryCatch({
 
         terra::rast(paste0(
-          "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_10/lulc/coverage/brazil_coverage_",
+          "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_11/lulc/coverage/brazil_coverage_",
           periodo,
           ".tif"
         )) |>
