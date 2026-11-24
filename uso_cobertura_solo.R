@@ -274,17 +274,19 @@ codigos
 
 raster_uso_mata <- purrr::imap(
   raster_uso,
-  ~.x |>
-    tidyterra::mutate(
-      !!{{paste0("brazil_coverage_", .y)}} := dplyr::case_when(
+  \(raster, nome){
 
-        .data[[paste0("brazil_coverage_", .y)]] %in%
-          (codigos |> as.numeric()) ~ "Mata",
-        .default = .data[[paste0("brazil_coverage_", .y)]] |> as.character()
+    raster |>
+      tidyterra::mutate(uso = dplyr::case_when(
+
+        uso %in% (codigos |> as.numeric()) ~ "Mata",
+        .default = uso |> as.character()
 
         )
-      ) |>
-    tidyterra::filter(.data[[paste0("brazil_coverage_", .y)]] == "Mata"),
+        ) |>
+    tidyterra::filter(uso == "Mata")
+
+    },
   .progress = TRUE)
 
 raster_uso_mata
