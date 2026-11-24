@@ -83,13 +83,15 @@ rm(list = "dados_ee")
 
 ## Visualizar ----
 
+raster_uso
+
 purrr::imap(raster_uso,
             \(raster, ano){
 
               ggplot() +
                 tidyterra::geom_spatraster(data = raster) +
-                scale_fill_viridis_d(option = "turbo",
-                                     na.translate = FALSE) +
+                scale_fill_viridis_c(option = "turbo",
+                                     na.value = "transparent") +
                 labs(title = ano)
 
               },
