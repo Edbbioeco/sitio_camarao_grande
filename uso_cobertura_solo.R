@@ -64,23 +64,34 @@ dados_ee
 ## Baixar ----
 
 raster_uso <- purrr::map(
-  dados_ee,
-  \(matriz_lista){
+  1985:2025,
+  \(periodo){
 
-    matriz <- purrr::map(matriz_lista, unlist) |> do.call(rbind, args = _)
+    url <- ee$ImageCollection("projects/mapbiomas-public/assets/brazil/lulc/v1")$
+      dplyr::filter(ee$Filter$eq("collection_id", 11))$
+      dplyr::filter(ee$Filter$eq("year", periodo))$
+      dplyr::first()$
+      dplyr::select("classification")$
+      getDownloadURL(
+        list(
+          region = geometria,
+          scale = 30,
+          crs = "EPSG:4326",
+          format = "GEO_TIFF"
+        )
+      )
 
-    matriz[matriz == 0] <- NA
+    arquivo <- tempfile(fileext = ".tif")
 
-    terra::rast(matriz,
-                extent = terra::ext(vet_geo),
-                crs = "EPSG:4326") |>
-      terra::mask(vet_geo)
+    download.file(url, arquivo, mode = "wb", quiet = TRUE)
+
+    terra::rast(arquivo) |>
+      terra::mask(sitio) |>
+      terra::toMemory()
 
   },
   .progress = TRUE) |>
-  purrr::set_names(as.character(1985:2025))
-
-rm(list = "dados_ee")
+  setNames(1985:2025 |> as.character())
 
 ## Visualizar ----
 
