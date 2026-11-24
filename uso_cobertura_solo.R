@@ -44,6 +44,22 @@ geometria <- sitio |>
 
 geometria
 
+## Extrair dados ----
+
+dados_ee <- ee$ImageCollection("projects/mapbiomas-public/assets/brazil/lulc/v1")$
+  filter(ee$Filter$eq("collection_id", 11))$
+  filter(ee$Filter$gte("year", 1985))$
+  filter(ee$Filter$lte("year", 2025))$
+  select("classification")$
+  toBands()$
+  clip(geometria)$
+  sampleRectangle(region = geometria, defaultValue = 0)$
+  getInfo() |>
+  purrr::pluck("properties") |>
+  purrr::discard_at("system:index")
+
+dados_ee
+
 ## Baixar ----
 
 raster_uso <- purrr::map(
@@ -70,17 +86,17 @@ raster_uso
 
 ## Visualizar ----
 
-purrr::imap(raster_uso_trat,
-            purrr::in_parallel(
+purrr::imap(raster_uso,
+            \(raster, ano){
 
-              ~ggplot() +
-                tidyterra::geom_spatraster(data = .x) +
+              ggplot() +
+                tidyterra::geom_spatraster(data = raster) +
                 scale_fill_viridis_d(option = "turbo",
                                      na.translate = FALSE) +
-                labs(title = .y)
+                labs(title = ano)
 
-           ),
-           .progress = TRUE)
+              },
+            .progress = TRUE)
 
 ## Exportar os mapas ----
 
