@@ -66,37 +66,6 @@ raster_uso <- purrr::map(
   .progress = TRUE) |>
   purrr::set_names(1985:2025 |> as.character())
 
-## Baixar ----
-
-raster_uso <- purrr::map(
-  1985:2025,
-  \(periodo){
-
-    tryCatch({
-
-      terra::rast(paste0(
-        "https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_11/lulc/coverage/brazil_coverage_",
-        periodo,
-        ".tif"
-        )) |>
-        terra::crop(sitio) |>
-        terra::mask(sitio)
-
-      },
-      error = \(e){
-
-        message("Erro no ano ", periodo, ": ", e$message)
-
-        NULL
-
-        }
-
-      )
-
-    },
-  .progress = TRUE) |>
-  setNames(1985:2025 |> as.character())
-
 raster_uso
 
 ## Remover os NULL da lista ----
