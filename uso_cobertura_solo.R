@@ -100,7 +100,8 @@ raster_uso <- purrr::map(
   \(raster){
 
     raster |>
-      tidyterra::mutate(lyr.1 = lyr.1 |> as.character())
+      tidyterra::rename(uso = 1) |>
+      tidyterra::mutate(uso = uso |> as.character())
 
     },
   .progress = TRUE)
