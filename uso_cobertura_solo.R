@@ -97,53 +97,68 @@ purrr::imap(raster_uso,
               },
             .progress = TRUE)
 
+## Transformar os dados em categóricos ----
+
+raster_uso <- purrr::map(
+  raster_uso,
+  \(raster){
+
+    raster |>
+      tidyterra::mutate(lyr.1 = lyr.1 |> as.character())
+
+    },
+  .progress = TRUE)
+
+raster_uso
+
 ## Exportar os mapas ----
 
-mapas_uso <- purrr::imap(raster_uso_trat,
-                         purrr::in_parallel(
+mapas_uso <- purrr::imap(
+  raster_uso,
+  \(raster, ano){
 
-             ~ggplot() +
-               tidyterra::geom_spatraster(data = .x) +
-               scale_fill_manual(na.translate = FALSE,
-                                 values = c("3" = "darkgreen",
-                                            "4" = "forestgreen",
-                                            "15" = "goldenrod",
-                                            "20" = "olivedrab3",
-                                            "21" = "orange4"),
-                                 breaks = c("3",
-                                            "4",
-                                            "20",
-                                            "15",
-                                            "21"),
-                                 labels = c("Floresta",
-                                            "Savana",
-                                            "Cana-de-açúcar",
-                                            "Pasto",
-                                            "Mosaico de usos"),
-                                 guide = guide_legend(
+    ggplot() +
+      tidyterra::geom_spatraster(data = raster) +
+      scale_fill_manual(na.translate = FALSE,
+                        values = c("3" = "darkgreen",
+                                   "4" = "forestgreen",
+                                   "15" = "goldenrod",
+                                   "20" = "olivedrab3",
+                                   "21" = "orange4"),
+                        breaks = c("3",
+                                   "4",
+                                   "20",
+                                   "15",
+                                   "21"),
+                        labels = c("Floresta",
+                                   "Savana",
+                                   "Cana-de-açúcar",
+                                   "Pasto",
+                                   "Mosaico de usos"),
+                        guide = guide_legend(
 
-                                   title.position = "top",
-                                   title.hjust = 0.5
+                          title.position = "top",
+                          title.hjust = 0.5
 
-                                   )) +
-               labs(title = paste0("Uso e cobertura do solo para ", .y),
-                    subtitle = "Fonte: MapBiomas",
-                    fill = "Classe de uso e cobertura do solo") +
-               theme_bw() +
-               theme(axis.text = element_text(size = 20, color = "black"),
-                     legend.text = element_text(size = 20, color = "black"),
-                     legend.title = element_text(size = 20, color = "black"),
-                     legend.position = "bottom",
-                     strip.text = element_text(size = 30, color = "black"),
-                     strip.background = element_rect(color = "black",
-                                                     linewidth = 1),
-                     panel.background = element_rect(linewidth = 1,
-                                                     color = "black"),
-                     plot.title = element_text(size = 20, color = "black"),
-                     plot.subtitle = element_text(size = 17.5, color = "black"))
+                          )) +
+      labs(title = paste0("Uso e cobertura do solo para ", ano),
+           subtitle = "Fonte: MapBiomas",
+           fill = "Classe de uso e cobertura do solo") +
+      theme_bw() +
+      theme(axis.text = element_text(size = 20, color = "black"),
+            legend.text = element_text(size = 20, color = "black"),
+            legend.title = element_text(size = 20, color = "black"),
+            legend.position = "bottom",
+            strip.text = element_text(size = 30, color = "black"),
+            strip.background = element_rect(color = "black",
+                                            linewidth = 1),
+            panel.background = element_rect(linewidth = 1,
+                                            color = "black"),
+            plot.title = element_text(size = 20, color = "black"),
+            plot.subtitle = element_text(size = 17.5, color = "black"))
 
-                         ),
-                         .progress = TRUE)
+    },
+  .progress = TRUE)
 
 mapas_uso
 
