@@ -4,6 +4,8 @@ library(sf)
 
 library(tidyverse)
 
+library(rgee)
+
 library(terra)
 
 library(tidyterra)
