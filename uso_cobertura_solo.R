@@ -45,22 +45,6 @@ geometria <- sitio |>
 
 geometria
 
-## Extrair dados ----
-
-dados_ee <- ee$ImageCollection("projects/mapbiomas-public/assets/brazil/lulc/v1")$
-  filter(ee$Filter$eq("collection_id", 11))$
-  filter(ee$Filter$gte("year", 1985))$
-  filter(ee$Filter$lte("year", 2025))$
-  select("classification")$
-  toBands()$
-  clip(geometria)$
-  sampleRectangle(region = geometria, defaultValue = 0)$
-  getInfo() |>
-  purrr::pluck("properties") |>
-  purrr::discard_at("system:index")
-
-dados_ee
-
 ## Baixar ----
 
 raster_uso <- purrr::map(
