@@ -47,6 +47,28 @@ geometria
 
 raster_uso <- purrr::map(
   1985:2025,
+  \(periodo) {
+
+    ee$ImageCollection("projects/mapbiomas-public/assets/brazil/lulc/v1")$
+      filter(ee$Filter$eq("collection_id", 11))$
+      filter(ee$Filter$eq("year", periodo))$
+      first()$
+      select("classification")$
+      clip(geometria) |>
+      rgee::ee_as_rast(
+        region = geometria,
+        scale = 30,
+        via = "getDownloadURL"
+      )
+
+  },
+  .progress = TRUE) |>
+  purrr::set_names(1985:2025 |> as.character())
+
+## Baixar ----
+
+raster_uso <- purrr::map(
+  1985:2025,
   \(periodo){
 
     tryCatch({
