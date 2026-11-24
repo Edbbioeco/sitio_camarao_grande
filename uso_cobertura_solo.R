@@ -35,6 +35,14 @@ ggplot() +
 
 rgee::ee_Initialize(project = Sys.getenv("gee_id"))
 
+## Extrair geometrias ----
+
+geometria <- sitio |>
+  rgee::sf_as_ee() |>
+  purrr::pluck("geometry")
+
+geometria
+
 ## Baixar ----
 
 raster_uso <- purrr::map(
