@@ -33,7 +33,8 @@ ggplot() +
 
 ## Iniciar Google Earth Enginee ----
 
-rgee::ee_Initialize(project = Sys.getenv("gee_id"))
+rgee::ee_Initialize(project = Sys.getenv("gee_id"),
+                    drive = TRUE)
 
 ## Extrair geometrias ----
 
