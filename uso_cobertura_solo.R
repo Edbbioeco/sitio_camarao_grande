@@ -35,8 +35,7 @@ ggplot() +
 
 raster_uso <- purrr::map(
   1985:2025,
-  purrr::in_parallel(
-    \(periodo) {
+  \(periodo){
 
       tryCatch({
 
@@ -57,9 +56,8 @@ raster_uso <- purrr::map(
 
       )
 
-      }
-
-    ), .progress = TRUE) |>
+      },
+  .progress = TRUE) |>
   setNames(1985:2025 |> as.character())
 
 raster_uso
