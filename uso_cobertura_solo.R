@@ -31,6 +31,10 @@ ggplot() +
 
 # Baixar e recortar rasters de uso e cobertura do solo ----
 
+## Iniciar Google Earth Enginee ----
+
+rgee::ee_Initialize(project = Sys.getenv("gee_id"))
+
 ## Baixar ----
 
 raster_uso <- purrr::map(
