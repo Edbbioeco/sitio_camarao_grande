@@ -38,8 +38,9 @@ rgee::ee_Initialize(project = Sys.getenv("gee_id"))
 ## Extrair geometrias ----
 
 geometria <- sitio |>
-  rgee::sf_as_ee() |>
-  purrr::pluck("geometry")
+  sf::st_as_sf() |>
+  rgee::sf_as_ee() %>%
+  .$geometry()
 
 geometria
 
