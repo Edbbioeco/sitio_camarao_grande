@@ -208,17 +208,17 @@ gif_uso |>
 
 ## Calcular diversidade ----
 
-div_paisagem_shannon <- raster_uso_trat |>
+div_paisagem_shannon <- raster_uso |>
   landscapemetrics::lsm_l_shdi() |>
-  dplyr::mutate(Ano = raster_uso_trat |>
+  dplyr::mutate(Ano = raster_uso |>
                   names() |>
                   as.numeric())
 
 div_paisagem_shannon
 
-div_paisagem_simpson <- raster_uso_trat |>
+div_paisagem_simpson <- raster_uso |>
   landscapemetrics::lsm_l_sidi() |>
-  dplyr::mutate(Ano = raster_uso_trat |>
+  dplyr::mutate(Ano = raster_uso |>
                   names() |>
                   as.numeric())
 
@@ -272,8 +272,8 @@ codigos
 
 ## Filtrar para as áreas de mata ----
 
-raster_uso_trat_mata <- purrr::imap(
-  raster_uso_trat,
+raster_uso_mata <- purrr::imap(
+  raster_uso,
   ~.x |>
     tidyterra::mutate(
       !!{{paste0("brazil_coverage_", .y)}} := dplyr::case_when(
@@ -287,11 +287,11 @@ raster_uso_trat_mata <- purrr::imap(
     tidyterra::filter(.data[[paste0("brazil_coverage_", .y)]] == "Mata"),
   .progress = TRUE)
 
-raster_uso_trat_mata
+raster_uso_mata
 
 ## Visualizar rasters filtrados ----
 
-purrr::imap(raster_uso_trat_mata,
+purrr::imap(raster_uso_mata,
             purrr::in_parallel(
 
               ~ggplot() +
@@ -306,7 +306,7 @@ purrr::imap(raster_uso_trat_mata,
 
 ## Exportar os mapss ----
 
-mapas_uso_mata <- purrr::imap(raster_uso_trat_mata,
+mapas_uso_mata <- purrr::imap(raster_uso_mata,
                               purrr::in_parallel(
 
           ~ggplot() +
@@ -390,7 +390,7 @@ gif_mata |>
 
 ### Calcular área ----
 
-areas_mata <- purrr::map_dbl(raster_uso_trat_mata,
+areas_mata <- purrr::map_dbl(raster_uso_mata,
                              purrr::in_parallel(
 
         ~.x |>
@@ -405,7 +405,7 @@ areas_mata
 
 ### Criar o data frame dos valores ----
 
-df_area <- tibble::tibble(Ano = raster_uso_trat_mata |>
+df_area <- tibble::tibble(Ano = raster_uso_mata |>
                             names() |>
                             as.numeric(),
                           `Diversidade da paisagem (shannon-Wiener)` = div_paisagem_shannon$value,
