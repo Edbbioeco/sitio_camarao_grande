@@ -68,19 +68,6 @@ raster_uso <- purrr::map(
 
 raster_uso
 
-## Remover os NULL da lista ----
-
-raster_uso_trat <- raster_uso |>
-  purrr::compact() |>
-  purrr::map(purrr::in_parallel(
-
-    ~.x |> terra::as.factor()
-
-    ),
-    .progress = TRUE)
-
-raster_uso_trat
-
 ## Visualizar ----
 
 purrr::imap(raster_uso_trat,
