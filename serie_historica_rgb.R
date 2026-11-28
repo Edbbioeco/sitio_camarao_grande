@@ -23,3 +23,10 @@ library(gganimate)
 ## Importar ----
 
 sitio <- sf::st_read("shapefile_sitio.shp")
+
+## Visualizar ----
+
+sitio
+
+ggplot() +
+  geom_sf(data = sitio, color = "black", linewidth = 1)
