@@ -55,11 +55,16 @@ raster_satelite <- purrr::map(
 
     fim <- (as.Date(periodo) + months(1)) |> as.character()
 
-    colecao <- ee$ImageCollection("LANDSAT/LE07/C02/T1_L2")$
-      merge(ee$ImageCollection("LANDSAT/LC08/C02/T1_L2"))$
-      merge(ee$ImageCollection("LANDSAT/LC09/C02/T1_L2"))$
+    colecao <- ee$ImageCollection("COPERNICUS/S2_SR_HARMONIZED")$
       filterBounds(rgee::sf_as_ee(sitio)$geometry())$
-      filterDate(periodo, fim)
+      filterDate(periodo, fim)$
+      linkCollection(ee$ImageCollection("GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED"),
+                     list("cs_cdf"))$
+      map(\(imagem){
+
+        imagem$updateMask(imagem$select("cs_cdf")$gte(0.6))
+
+        })
 
     if(colecao$size()$getInfo() == 0){
 
@@ -68,13 +73,12 @@ raster_satelite <- purrr::map(
     }
 
     url <- colecao$
-      sort("CLOUD_COVER")$
-      first()$
-      select("SR_B.*")$
+      select(c("B2", "B3", "B4", "B8"))$
+      median()$
       getDownloadURL(
         list(
           region = rgee::sf_as_ee(sitio)$geometry(),
-          scale = 30,
+          scale = 10,
           crs = "EPSG:4326",
           format = "GEO_TIFF"
         )
@@ -85,6 +89,7 @@ raster_satelite <- purrr::map(
     download.file(url, arquivo, mode = "wb", quiet = TRUE)
 
     terra::rast(arquivo) |>
+      setNames(c("blue", "green", "red", "nir")) |>
       terra::mask(sitio) |>
       terra::toMemory()
 
