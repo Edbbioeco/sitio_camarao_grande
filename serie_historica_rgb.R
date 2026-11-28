@@ -47,3 +47,49 @@ meses <- seq(as.Date("2012-01-01"),
 
 meses
 
+## Baixar imagens ----
+
+raster_satelite <- purrr::map(
+  meses,
+  \(periodo){
+
+    fim <- (as.Date(periodo) + months(1)) |> as.character()
+
+    colecao <- ee$ImageCollection("LANDSAT/LE07/C02/T1_L2")$
+      merge(ee$ImageCollection("LANDSAT/LC08/C02/T1_L2"))$
+      merge(ee$ImageCollection("LANDSAT/LC09/C02/T1_L2"))$
+      filterBounds(rgee::sf_as_ee(sitio)$geometry())$
+      filterDate(periodo, fim)
+
+    if(colecao$size()$getInfo() == 0){
+
+      return(NULL)
+
+    }
+
+    url <- colecao$
+      sort("CLOUD_COVER")$
+      first()$
+      select("SR_B.*")$
+      getDownloadURL(
+        list(
+          region = rgee::sf_as_ee(sitio)$geometry(),
+          scale = 30,
+          crs = "EPSG:4326",
+          format = "GEO_TIFF"
+        )
+      )
+
+    arquivo <- tempfile(fileext = ".tif")
+
+    download.file(url, arquivo, mode = "wb", quiet = TRUE)
+
+    terra::rast(arquivo) |>
+      terra::mask(sitio) |>
+      terra::toMemory()
+
+  },
+  .progress = TRUE) |>
+  setNames(meses |> stringr::str_sub(1, 7)) |>
+  purrr::compact()
+
