@@ -17,3 +17,9 @@ library(landscapemetrics)
 library(ggview)
 
 library(gganimate)
+
+# Shapefile do sítio ----
+
+## Importar ----
+
+sitio <- sf::st_read("shapefile_sitio.shp")
