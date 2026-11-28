@@ -109,7 +109,8 @@ purrr::imap(
     ggplot() +
       tidyterra::geom_spatraster_rgb(data = raster,
                                      r = 3, g = 2, b = 1,
-                                     stretch = "lin") +
+                                     max_col_value = 3000,
+                                     interpolate = FALSE) +
       labs(title = data)
 
   },
