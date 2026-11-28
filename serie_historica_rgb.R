@@ -30,3 +30,10 @@ sitio
 
 ggplot() +
   geom_sf(data = sitio, color = "black", linewidth = 1)
+
+# Imagens de satélite RGB ----
+
+## Iniciar Google Earth Enginee ----
+
+rgee::ee_Initialize(project = Sys.getenv("rgee_id"),
+                    drive = TRUE)
