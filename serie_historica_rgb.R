@@ -37,3 +37,13 @@ ggplot() +
 
 rgee::ee_Initialize(project = Sys.getenv("rgee_id"),
                     drive = TRUE)
+
+## Settar imagens ----
+
+meses <- seq(as.Date("2012-01-01"),
+             lubridate::floor_date(Sys.Date(), "month") - months(1),
+             by = "month") |>
+  as.character()
+
+meses
+
