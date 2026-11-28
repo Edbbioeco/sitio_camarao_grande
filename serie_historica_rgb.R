@@ -98,3 +98,19 @@ raster_satelite <- purrr::map(
   setNames(meses |> stringr::str_sub(1, 7)) |>
   purrr::compact()
 
+## Visuaizar ----
+
+raster_satelite
+
+purrr::imap(
+  raster_satelite,
+  \(raster, data){
+
+    ggplot() +
+      tidyterra::geom_spatraster_rgb(data = raster,
+                                     r = 3, g = 2, b = 1,
+                                     stretch = "lin") +
+      labs(title = data)
+
+  },
+  .progress = TRUE)
